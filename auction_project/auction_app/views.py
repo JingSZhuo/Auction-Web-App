@@ -14,3 +14,32 @@ def index(request):
     return HttpResponse(output)
 
 @csrf_exempt
+def addItems_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'items': [
+                item.to_dict()
+                for item in Item.objects.all()
+            ]
+        })
+    if request.method == 'POST':
+        json_convert_to_dict = json.loads(request.body)
+        item = Item.objects.create(
+            item_title = json_convert_to_dict['itemTitle'],
+            item_description = json_convert_to_dict['itemDescription'],
+            item_sprice = json_convert_to_dict['itemStartingPrice'],
+            item_picture = json_convert_to_dict['itemPicture'],
+            item_auctionfinish = json_convert_to_dict['itemActionFinish'],
+        ) 
+        return JsonResponse(item.to_dict())
+
+
+    else:
+        pass
+
+
+# def car_api(request: HttpRequest, car_id: int) -> HttpResponse:
+#     car = get_object_or_404(Car, id=car_id)
+
+#     if request.method == 'GET':
+#         return JsonResponse(car.to_dict())

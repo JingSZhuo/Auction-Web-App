@@ -28,7 +28,7 @@ class Item(models.Model):
     item_title=models.CharField(max_length=254)
     item_description=models.CharField(max_length=2000)
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
-    item_picture=models.ImageField()
+    item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField()
 
     def __str__(self):
