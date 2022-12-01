@@ -110,6 +110,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom User Model
+
+AUTH_USER_MODEL = 'auction_app.CustomUser'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

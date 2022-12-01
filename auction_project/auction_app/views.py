@@ -33,8 +33,6 @@ def addItems_api(request):
             item_auctionfinish = json_convert_to_dict['itemActionFinish'],
         ) 
         return JsonResponse(item.to_dict())
-
-
     else:
         pass
 

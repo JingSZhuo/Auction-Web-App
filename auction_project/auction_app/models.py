@@ -1,6 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
+class CustomUser(AbstractUser):
+    pass
+
+
 class User(models.Model):
     user_email = models.EmailField(max_length=254)
     user_dob = models.DateField()
@@ -12,8 +18,8 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_email
-    def __str__(self):
-        return self.user_dob
+    def __str__(self) -> str:
+        return str(self.user_dob)
 
 
     def to_dict(self):
@@ -37,8 +43,14 @@ class Item(models.Model):
     def __str__(self):
         return self.item_description
 
-    # def __str__(self):
-    #     return self.item_sprice
+    def __str__(self):
+         return str(self.item_sprice)
+
+    def __str__(self) -> str:
+        return self.item_picture
+
+    def __str__(self) -> str:
+        return str(self.item_auctionfinish)
 
 
     def to_dict(self):
