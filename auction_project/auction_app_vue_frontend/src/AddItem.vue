@@ -45,9 +45,9 @@
               itemDescription: this.item_description,
               itemStartingPrice: this.item_sprice,
               itemPicture: this.item_picture,
-              itemActionFinish: this.item_auctionfinish,
+              itemActionFinish: this.item_auctionfinish
           }
-          await fetch("http://localhost:8000/auction_app/api/addItems/" , {
+          await fetch("http://localhost:8000/api/addItems/" , {
               method: "POST",
               headers: {
                   'Content-Type': 'application/json',
@@ -57,7 +57,7 @@
           .then((response) => response.json())
           this.fetchItems()
         },
+    }
   }
-}
 
 </script>

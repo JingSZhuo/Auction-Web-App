@@ -37,11 +37,9 @@ class Item(models.Model):
     def __str__(self):
         return self.item_description
 
-    def __str__(self):
-        return self.item_sprice
+    # def __str__(self):
+    #     return self.item_sprice
 
-    def __str__(self):
-        return self.item_auctionfinish
 
     def to_dict(self):
         return{
