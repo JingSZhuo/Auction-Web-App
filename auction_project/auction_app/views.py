@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from .models import Item,User
+import json
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -11,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     item_list= Item.objects.order_by('item_title')
     output = ', '.join((i.item_title for i in item_list))
-    return HttpResponse(output)
+    return HttpResponse(output, "Auction in development...")
 
 @csrf_exempt
 def addItems_api(request):
