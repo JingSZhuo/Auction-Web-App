@@ -6,7 +6,7 @@ from .models import CustomUser
 
 from .models import User, Item
 
-admin.site.register(User)
+#admin.site.register(User)
 admin.site.register(Item)
 admin.site.register(CustomUser, UserAdmin)
 

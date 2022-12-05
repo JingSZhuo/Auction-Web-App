@@ -4,7 +4,10 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class CustomUser(AbstractUser):
-    pass
+    custom_user_email = models.EmailField(max_length=254, unique=True, default=True)
+    #custom_username = models.CharField(max_length=255, default=True)
+
+    #USERNAME_FIELD = 'custom_user_email'
 
 
 class User(models.Model):
