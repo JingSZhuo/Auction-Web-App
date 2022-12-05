@@ -39,6 +39,7 @@ class Item(models.Model):
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
     item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField()
+    item_personHighestBid=models.CharField(max_length=254, default="tbd")
 
     def __str__(self):
         return self.item_title
@@ -54,6 +55,9 @@ class Item(models.Model):
 
     def __str__(self) -> str:
         return str(self.item_auctionfinish)
+
+    def __str__(self) -> str:
+        return self.item_personHighestBid
 
 
     def to_dict(self):
