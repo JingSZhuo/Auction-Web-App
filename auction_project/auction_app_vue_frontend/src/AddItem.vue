@@ -33,7 +33,7 @@
     methods: {
         async fetchItems() {
             //perorm an Ajax request to fetch the list of cars
-            let response = await fetch("http://localhost:8000/auction_app/api/addItems/");
+            let response = await fetch("http://localhost:8000/api/addItems/");
             let data = await response.json();
             this.items = data;
             console.log(this.items);

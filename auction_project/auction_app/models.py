@@ -19,7 +19,7 @@ class User(models.Model):
     
     user_profilePicture = models.ImageField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.user_email
     def __str__(self) -> str:
         return str(self.user_dob)
