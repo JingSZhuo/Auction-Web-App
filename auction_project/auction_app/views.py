@@ -36,7 +36,9 @@ def addItems_api(request):
     else:
         pass
 
-
+@csrf_exempt
+def signup_page(request):
+    return render(request, 'index.html')
 # def car_api(request: HttpRequest, car_id: int) -> HttpResponse:
 #     car = get_object_or_404(Car, id=car_id)
 
