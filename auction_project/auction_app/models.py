@@ -1,13 +1,59 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import BaseUserManager
 
 # Create your models here.
 
-class CustomUser(AbstractUser):
-    custom_user_email = models.EmailField(max_length=254, unique=True, default=True)
-    #custom_username = models.CharField(max_length=255, default=True)
+class CustomUserManager(BaseUserManager):
+    
+    def create_user(self, email, password, **extra_fields):
+        """
+        Create and save a User with the given email and password.
+        """
+        if not email:
+            raise ValueError(_('The Email must be set'))
+        
+        email = self.normalize_email(email)
+        user = self.model(
+            email=email,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, password, **extra_fields):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+            #date_of_birth=date_of_birth,
+        )
+        user.is_admin = True
+        user.is_staff = True
+        user.is_superuser = True
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        user.save(using=self._db)
+        return user
 
-    #USERNAME_FIELD = 'custom_user_email'
+class CustomUser(AbstractUser):
+    username = None
+    email = models.EmailField(max_length=254, unique=True, default=True)
+    date_of_birth = models.DateField(null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+    
+    objects = CustomUserManager()
+    
+    def __str__(self) -> str:
+        return self.email
+
 
 
 class User(models.Model):
