@@ -1,5 +1,9 @@
 <template>
     <div>
+        <h1>All Items</h1>
+        <Header></Header>
+    </div>
+    <div>
         <table>
             <tr v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
                 <th>{{item.id}}</th>
@@ -11,9 +15,21 @@
             </tr>
         </table>
     </div>
+    <div>
+        <a href="./views/AddItem.vue">
+            <button type="button">Add Item Here</button>
+        </a>
+        
+    </div>
+
+
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+import Header from './components/Header.vue'
+
     export default{
     data() {
         return {
@@ -29,6 +45,17 @@
     },
     mounted(){
       this.fetchItems()
+    },
+
+    components: {Header},
+
+    setup(){
+        const router = useRouter()
+
+
+
+
     }
 }
+
 </script>
