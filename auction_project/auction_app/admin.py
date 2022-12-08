@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
+from .forms import CustomUserChangeForm, CusomUserCreationForm
 
 # Register your models here.
 
@@ -10,7 +11,10 @@ admin.site.register(Item)
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('email', 'is_staff', 'is_active',)
+    add_form = CusomUserCreationForm
+    form = CustomUserChangeForm
+    
+    list_display = ('email', 'is_staff', 'is_active', 'date_of_birth')
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

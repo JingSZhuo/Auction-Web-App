@@ -32,7 +32,7 @@ class CustomUserManager(BaseUserManager):
             email,
             password=password,
             date_of_birth=None,
-            profilePicture=None,
+            profile_picture=None,
         )
         user.is_admin = True
         user.is_staff = True
@@ -47,7 +47,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     username = None
-    email = models.EmailField(max_length=254, unique=True, default=True)
+    email = models.EmailField(max_length=254, unique=True, default="")
     date_of_birth = models.DateField(default="")
     profilePicture = models.ImageField(default="")
 
@@ -55,6 +55,12 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
     
     object = CustomUserManager()
+    
+    def __str__(self) -> str:
+        return str(self.date_of_birth)
+    
+    def __str__(self) -> str:
+        return str(self.profilePicture)
     
     def __str__(self) -> str:
         return self.email

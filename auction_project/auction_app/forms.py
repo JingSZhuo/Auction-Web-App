@@ -1,6 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from auction_app.models import CustomUser
-from django import forms
 
 
 class CusomUserCreationForm(UserCreationForm):

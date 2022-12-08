@@ -19,6 +19,7 @@
         <a href="./views/AddItem.vue">
             <button type="button">Add Item Here</button>
         </a>
+        <button @click="createNewUser">Add New User</button>
         
     </div>
 
@@ -41,6 +42,12 @@ import Header from './components/Header.vue'
             let response = await fetch("http://localhost:8000/api/addItems/");
             let data = await response.json();
             this.items = data;
+        },
+        async createNewUser() {
+            await fetch("http://localhost:8000/signup/", {
+                method: "POST",
+                credentials: "include",
+            });
         }
     },
     mounted(){
