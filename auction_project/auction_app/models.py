@@ -32,7 +32,7 @@ class CustomUserManager(BaseUserManager):
             email,
             password=password,
             date_of_birth=None,
-            profilePicture=None,
+            profile_picture=None,
         )
         user.is_admin = True
         user.is_staff = True
