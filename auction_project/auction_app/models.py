@@ -6,16 +6,18 @@ from django.contrib.auth.base_user import BaseUserManager
 
 class CustomUserManager(BaseUserManager):
     
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, date_of_birth, profilePicture, **extra_fields):
         """
         Create and save a User with the given email and password.
         """
         if not email:
-            raise ValueError(_('The Email must be set'))
+            raise ValueError(_('Invalid Email'))
         
         email = self.normalize_email(email)
         user = self.model(
             email=email,
+            date_of_birth=date_of_birth,
+            profilePicture=profilePicture,
             **extra_fields
         )
         user.set_password(password)
@@ -24,13 +26,13 @@ class CustomUserManager(BaseUserManager):
     
     def create_superuser(self, email, password, **extra_fields):
         """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
+        Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             email,
             password=password,
-            #date_of_birth=date_of_birth,
+            date_of_birth=None,
+            profilePicture=None,
         )
         user.is_admin = True
         user.is_staff = True
@@ -40,11 +42,14 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_active', True)
         user.save(using=self._db)
         return user
+    
+"""Custom User Model | Profile Model"""    
 
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(max_length=254, unique=True, default=True)
-    date_of_birth = models.DateField(null=True)
+    date_of_birth = models.DateField(default="")
+    profilePicture = models.ImageField(default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -53,31 +58,39 @@ class CustomUser(AbstractUser):
     
     def __str__(self) -> str:
         return self.email
-
-
-
-class User(models.Model):
-    user_email = models.EmailField(max_length=254)
-    user_dob = models.DateField()
-
-    # to use ImageField you will need to install Pillow
-    #pip install Pillow
     
-    user_profilePicture = models.ImageField()
-
-    def __str__(self) -> str:
-        return self.user_email
-    def __str__(self) -> str:
-        return str(self.user_dob)
-
-
     def to_dict(self):
         return{
             'id': self.id,
-            'user_email': self.user_email,
-            'user_dob': self.user_dob,
-            'user_profilePicture': self.user_profilePicture
+            'user_email': self.email,
+            'user_dob': self.date_of_birth,
+            'user_profilePicture': self.profilePicture
         }
+
+
+
+# class User(models.Model):
+#     user_email = models.EmailField(max_length=254)
+#     user_dob = models.DateField()
+
+#     # to use ImageField you will need to install Pillow
+#     #pip install Pillow
+    
+#     user_profilePicture = models.ImageField()
+
+#     def __str__(self) -> str:
+#         return self.user_email
+#     def __str__(self) -> str:
+#         return str(self.user_dob)
+
+
+#     def to_dict(self):
+#         return{
+#             'id': self.id,
+#             'user_email': self.user_email,
+#             'user_dob': self.user_dob,
+#             'user_profilePicture': self.user_profilePicture
+#         }
 
 class Item(models.Model):
     item_title=models.CharField(max_length=254)
@@ -86,9 +99,6 @@ class Item(models.Model):
     item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField()
     item_personHighestBid=models.CharField(max_length=254, default="tbd")
-
-    def __str__(self):
-        return self.item_title
 
     def __str__(self):
         return self.item_description
@@ -104,6 +114,9 @@ class Item(models.Model):
 
     def __str__(self) -> str:
         return self.item_personHighestBid
+    
+    def __str__(self):
+        return self.item_title
 
 
     def to_dict(self):

@@ -1,13 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
-from django.contrib.auth.models import Group
 
 # Register your models here.
 
-from .models import User, Item
+from .models import Item
 
-#admin.site.register(User)
 admin.site.register(Item)
 
 class CustomUserAdmin(UserAdmin):

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
-from .models import Item,User
+from .models import Item
 import json
 
 from django.views.decorators.csrf import csrf_exempt
