@@ -8,5 +8,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('api/addItems/', views.addItems_api),
-    path('signup', views.signup_page)
+    path('signup/', views.signup_page, name="signup"),
+    path('login/', views.login_page, name="login" )
+    
 ]

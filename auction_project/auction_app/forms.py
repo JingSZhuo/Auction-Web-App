@@ -3,8 +3,16 @@ from auction_app.models import CustomUser
 from django import forms
 
 
-# class SignupForm(UserCreationForm):
-#     class Meta:
-#         model = CustomUser
-#         fields = '__all__'
+class CusomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
+        
+        
+
+class CustomUserChangeForm(UserChangeForm):
+    
+    class Meta: 
+        model = CustomUser
+        fields = ('email',)
 

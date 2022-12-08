@@ -6,7 +6,7 @@ from django.contrib.auth.base_user import BaseUserManager
 
 class CustomUserManager(BaseUserManager):
     
-    def create_user(self, email, password, date_of_birth, profilePicture, **extra_fields):
+    def create_user(self, email, password, date_of_birth, profile_picture, **extra_fields):
         """
         Create and save a User with the given email and password.
         """
@@ -17,7 +17,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(
             email=email,
             date_of_birth=date_of_birth,
-            profilePicture=profilePicture,
+            profilePicture=profile_picture,
             **extra_fields
         )
         user.set_password(password)
@@ -40,7 +40,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-        user.save(using=self._db)
+        user.save(using=self._db)             #save to local sqlite database
         return user
     
 """Custom User Model | Profile Model"""    
@@ -54,7 +54,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     
-    objects = CustomUserManager()
+    object = CustomUserManager()
     
     def __str__(self) -> str:
         return self.email

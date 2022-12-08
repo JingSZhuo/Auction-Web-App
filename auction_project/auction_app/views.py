@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
-from .models import Item
+from .models import Item, CustomUserManager, CustomUser
 import json
 
 from django.views.decorators.csrf import csrf_exempt
@@ -35,10 +35,23 @@ def addItems_api(request):
         return JsonResponse(item.to_dict())
     else:
         pass
+    
+@csrf_exempt
+def add_user(request):    
+    if request.method == 'POST':
+        user = CustomUser.object.create_user()
+        user.save()
 
 @csrf_exempt
 def signup_page(request):
-    return render(request, 'index.html')
+    return render(request, 'authentication/register.html')
+
+@csrf_exempt
+def login_page(request):
+    return render(request, 'authentication/login.html')
+
+
+
 # def car_api(request: HttpRequest, car_id: int) -> HttpResponse:
 #     car = get_object_or_404(Car, id=car_id)
 
