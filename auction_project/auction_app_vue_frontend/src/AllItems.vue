@@ -2,30 +2,27 @@
     <div>
         <h1>All Items</h1>
         <Header></Header>
+        <label>Search: </label>
         <input type="text" v-model="search">
-        <button>Search</button>
     </div>
     <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
         <div v-if="search!=''">
-            <div v-if="((item.item_title.search(search))!=-1 || (item.item_description.search(search))!=-1)">
-                <!-- v-if="(search!='') && ((search) in (item.item_title) || (search) in (item.item_description)) -->
-                now here
-                {{item.id}}<br/>
-                {{item.item_title}}<br/>
-                {{item.item_description}}<br/>
-                {{item.item_sprice}}<br/>
-                {{item.item_picture}}<br/>
-                {{item.item_auctionfinish}}
+            <div v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
+                ID:{{item.id}}<br/>
+                Title:{{item.item_title}}<br/>
+                Description:{{item.item_description}}<br/>
+                Price: {{item.item_sprice}}<br/>
+                Picture: {{item.item_picture}}<br/>
+                Auction Finish: {{item.item_auctionfinish}}<br/>
             </div>
         </div>
         <div v-else>
-            I am here
-            {{item.id}}<br/>
-            {{item.item_title}}<br/>
-            {{item.item_description}}<br/>
-            {{item.item_sprice}}<br/>
-            {{item.item_picture}}<br/>
-            {{item.item_auctionfinish}}
+            ID:{{item.id}}<br/>
+            Title:{{item.item_title}}<br/>
+            Description:{{item.item_description}}<br/>
+            Price: {{item.item_sprice}}<br/>
+            Picture: {{item.item_picture}}<br/>
+            Auction Finish: {{item.item_auctionfinish}}<br/>
         </div>
     </div>
     <div>
