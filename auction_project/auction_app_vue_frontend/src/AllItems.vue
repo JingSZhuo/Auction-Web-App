@@ -7,7 +7,7 @@
     </div>
     <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
         <div v-if="search!=''">
-            <div v-if="((item.item_title.search(search))!=-1 && (item.item_description.search(search))!=-1)">
+            <div v-if="((item.item_title.search(search))!=-1 || (item.item_description.search(search))!=-1)">
                 <!-- v-if="(search!='') && ((search) in (item.item_title) || (search) in (item.item_description)) -->
                 now here
                 {{item.id}}<br/>
