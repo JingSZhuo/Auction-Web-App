@@ -2,25 +2,24 @@
     <div>
         <h1>All Items</h1>
         <Header></Header>
+        <input type="text" v-model="search">
+        <button>Search</button>
     </div>
-    <div>
-        <table>
-            <tr v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
-                <th>{{item.id}}</th>
-                <th>{{item.item_title}}</th>
-                <th>{{item.item_description}}</th>
-                <th>{{item.item_sprice}}</th>
-                <th>{{item.item_picture}}</th>
-                <th>{{item.item_auctionfinish}}</th>
-            </tr>
-        </table>
+    <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
+        <div v-if="(search!=null) && ((search) in (item.item_title) || (search) in (item.item_description))">
+            {{item.id}}<br/>
+            {{item.item_title}}<br/>
+            {{item.item_description}}<br/>
+            {{item.item_sprice}}<br/>
+            {{item.item_picture}}<br/>
+            {{item.item_auctionfinish}}
+        </div>
     </div>
     <div>
         <a href="./views/AddItem.vue">
             <button type="button">Add Item Here</button>
         </a>
         <button @click="createNewUser">Add New User</button>
-        
     </div>
 
 
@@ -34,7 +33,8 @@ import Header from './components/Header.vue'
     export default{
     data() {
         return {
-            items: [] as any[]
+            items: [] as any[],
+            search: string
         };
     },
     methods: {
