@@ -6,7 +6,20 @@
         <button>Search</button>
     </div>
     <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
-        <div v-if="(search!=null) && ((search) in (item.item_title) || (search) in (item.item_description))">
+        <div v-if="search!=''">
+            <div v-if="((item.item_title.search(search))!=-1 && (item.item_description.search(search))!=-1)">
+                <!-- v-if="(search!='') && ((search) in (item.item_title) || (search) in (item.item_description)) -->
+                now here
+                {{item.id}}<br/>
+                {{item.item_title}}<br/>
+                {{item.item_description}}<br/>
+                {{item.item_sprice}}<br/>
+                {{item.item_picture}}<br/>
+                {{item.item_auctionfinish}}
+            </div>
+        </div>
+        <div v-else>
+            I am here
             {{item.id}}<br/>
             {{item.item_title}}<br/>
             {{item.item_description}}<br/>
@@ -34,7 +47,7 @@ import Header from './components/Header.vue'
     data() {
         return {
             items: [] as any[],
-            search: string
+            search: '' as any
         };
     },
     methods: {
