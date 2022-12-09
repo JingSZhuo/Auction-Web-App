@@ -32,14 +32,14 @@
     },
     methods: {
         async fetchItems() {
-            //perorm an Ajax request to fetch the list of cars
+            //perorm an Ajax request to fetch the list of items
             let response = await fetch("http://localhost:8000/api/addItems/");
             let data = await response.json();
             this.items = data;
             console.log(this.items);
         },
         async postItems(){
-          //Ajax request to say that this is the new car model
+          //Ajax request to say that this is the new item model
           const user_form_input = {
               itemTitle: this.item_title,
               itemDescription: this.item_description,
