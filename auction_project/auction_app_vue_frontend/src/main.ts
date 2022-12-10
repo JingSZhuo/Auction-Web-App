@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
-import App from './AllItems.vue'
+import App from './AllItems.vue'       //Root Component
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 

@@ -2,8 +2,8 @@
     <div class="text-center my-3">
       <h4>Ebay</h4>
       <div class="d-flex justify-content-center">
-        <HeaderLink to="/" exact>Home</HeaderLink>
-        <HeaderLink to="../AllList">List</HeaderLink>
+        <HeaderLink to="/home" exact>Home</HeaderLink>
+        <HeaderLink to="/addItem">List</HeaderLink> 
         <!-- <HeaderLink to=""></HeaderLink> -->
       </div>
     </div>
