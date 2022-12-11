@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>User Profile</h1>
-    <img src="profile example.png">
+    <img src="profile example.png" alt="profile-page.png">
     <button>Change Profile Picture</button><br>
     <h3>Email</h3>
     <button>Change Email</button><br>

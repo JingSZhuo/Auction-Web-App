@@ -3,7 +3,8 @@
         <div>
             <router-link to="/home">Home</router-link>
             <router-link to="/addItem">Add Item</router-link>
-            <router-view/>
+            <router-link to="/signUp">Signup</router-link>
+            <router-view/>                   <!--Shows the component when a router-link is clicked-->
         </div>
         <h1>All Items</h1>
         <!-- <Header></Header> -->
@@ -31,12 +32,12 @@
             Auction Finish: {{item.item_auctionfinish}}<br/><br/>
         </div>
     </div>
-    <div>
+    <!-- <div>
         <a href="./views/AddItem.vue">
             <button type="button">Add Item Here</button>
         </a>
         <button @click="createNewUser">Add New User</button>
-    </div>
+    </div> -->
 
 
 </template>
@@ -55,32 +56,22 @@ import Header from './components/Header.vue'
     },
     methods: {
         async fetchItems() {
-            let response = await fetch("http://localhost:8000/api/addItems/");
+            let response = await fetch("http://localhost:8000/api/addItems/");       //GET request
             let data = await response.json();
             this.items = data;
         },
-        async createNewUser() {
-            await fetch("http://localhost:8000/signup/", {
-                method: "POST",
-                credentials: "include",
-            });
-        }
+
     },
     mounted(){
       this.fetchItems()
     },
+    // components: {
+    //     Header,
+    // },
 
-    components: {
-        Header,
-    },
-
-    setup(){
-        const router = useRouter()
-
-
-
-
-    }
+    // setup(){
+    //     const router = useRouter()
+    // }
 }
 
 </script>

@@ -43,7 +43,13 @@ def addItems_api(request):
 @csrf_exempt
 def signup_page(request):
     if request.method == 'POST':
-        user = CustomUser.object.create_user("email@email.com", "password123", "2022-12-08", "png.png")
+        json_convert_to_python_dictionary = json.loads(request.body)
+        user = CustomUser.object.create_user(
+                json_convert_to_python_dictionary['email'], 
+                json_convert_to_python_dictionary['password'],
+                json_convert_to_python_dictionary['dob'], 
+                json_convert_to_python_dictionary['image'],
+            )
         user.save()
     return HttpResponse("Created!")
 

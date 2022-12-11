@@ -2,6 +2,7 @@ import { createWebHashHistory, createRouter, RouteRecordRaw } from "vue-router";
 // import AllItems from '../AllItems.vue'
 import Home from '../views/Home.vue'
 import AddItem from '../views/AddItem.vue'
+import SignUp from '../views/signup.vue'
 
 //below: dynamically routed! 
 //const Home = import('../views/Home.vue')
@@ -21,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/addItem',
         name: 'AddItem',
         component: AddItem
+    },
+    {
+        path: '/signUp',
+        name: 'signup',
+        component: SignUp
     },
     // {
     //     path: '/allItems/:id',
