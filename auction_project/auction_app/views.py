@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpRequest
 from .models import Item, CustomUserManager, CustomUser
 from django.views.generic.edit import CreateView
+from django.contrib.auth import login, authenticate, logout
 
-from .forms import CusomUserCreationForm
-
+"""JSON import"""
 import json
 
+"""CSRF EXEMPTION"""
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -53,11 +54,32 @@ def signup_page(request):
         user.save()
     return HttpResponse("Created!")
 
-        
 
+@csrf_exempt
+def redirect_page(request):
+    if request.user.is_authenticated:
+        return HttpResponse("Logged in")
+    else:
+        return HttpResponse("Not logged in")
 
+@csrf_exempt
 def login_page(request):
-    return render(request, 'authentication/login.html')
+    # json_convert_to_python_dictionary = json.loads(request.body)
+    # email = json_convert_to_python_dictionary['email']
+    # password = json_convert_to_python_dictionary['password']
+    email = "test@gmail.com"
+    password = "password"
+    user = authenticate(request, username=email, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponse("Successfully Logged in")
+    else:
+        return HttpResponse("Failed to login")
+    
+@csrf_exempt        
+def logout_page(request):
+    logout(request)
+    return HttpResponse("Logged out")
 
 
 

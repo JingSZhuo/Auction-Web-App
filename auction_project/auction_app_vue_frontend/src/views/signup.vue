@@ -12,7 +12,7 @@
 
         <input type="password" placeholder="password..." v-model="password_field"/> <br><br>
 
-        <input type="text" placeholder="Image..." v-model="image_field"/> <br><br>
+        <!-- <input type="text" placeholder="Image..." v-model="image_field"/> <br><br> -->
 
         <button @click="submitUserDetails">Signup</button>
 
@@ -41,22 +41,16 @@ export default{
                 image: this.image_field as any,
             }
 
-            try {
-                await fetch("http://localhost:8000/signup/" , {
-                    method: 'POST',
-                    headers: {
+            await fetch("http://localhost:8000/signup/" , {
+                method: 'POST',
+                headers: {
                     'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(createNewUserDetails)
-                })
-                alert("User created")
-                console.log("Sent!")
-            }
-            catch { alert("Error creating a user") }
-
+                },
+                body: JSON.stringify(createNewUserDetails)
+            })
+            console.log("Sent!")
         }
     }
-
 }
 
 </script>

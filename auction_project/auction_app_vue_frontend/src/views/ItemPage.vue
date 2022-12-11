@@ -53,11 +53,11 @@ export default defineComponent({
             this.items = data;
             console.log(this.items);
         },
-    async bidItem(email: string, item_sprice: number){
-          //Ajax request to say that this is the new item model
-          const updated_data = {
-              updated_email: this.email,
-              updated_sprice: this.item_sprice,
+        async bidItem(email: string, item_sprice: number){
+            //Ajax request to say that this is the new item model
+            const updated_data = {
+                updated_email: this.email,
+                updated_sprice: this.item_sprice,
 
           }
           await fetch("http://localhost:8000/api/addItems/" , {
@@ -70,6 +70,7 @@ export default defineComponent({
           .then((response) => response.json())
           this.fetchItems()
         },
+    }
 })
   
 
