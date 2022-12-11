@@ -1,11 +1,6 @@
 <template>
-    <div>
         <div>
-            <router-link to="/home">Home</router-link>
-            <router-link to="/addItem">Add Item</router-link>
-            <router-link to="/signUp">Signup</router-link>
-            <router-view/>                   <!--Shows the component when a router-link is clicked-->
-        </div>
+        <br/>
         <h1>All Items</h1>
         <!-- <Header></Header> -->
         <label>Search: </label>
