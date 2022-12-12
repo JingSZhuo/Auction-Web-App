@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpRequest
+from django.http import HttpResponse, JsonResponse
 from .models import Item, CustomUserManager, CustomUser
 from django.views.generic.edit import CreateView
 
-from .forms import CusomUserCreationForm
+"""Authentication packages"""
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
+"""JSON import"""
 import json
 
+"""CSRF EXEMPTION"""
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -43,15 +47,46 @@ def addItems_api(request):
 @csrf_exempt
 def signup_page(request):
     if request.method == 'POST':
-        user = CustomUser.object.create_user("email@email.com", "password123", "2022-12-08", "png.png")
+        json_convert_to_python_dictionary = json.loads(request.body)
+        user = CustomUser.object.create_user(
+                json_convert_to_python_dictionary['email'], 
+                json_convert_to_python_dictionary['password'],
+                json_convert_to_python_dictionary['dob'], 
+                json_convert_to_python_dictionary['image'],
+            )
         user.save()
     return HttpResponse("Created!")
 
-        
 
+@csrf_exempt
+def redirect_page(request):
+    if request.user.is_authenticated:
+        return HttpResponse("Logged in")
+    else:
+        return HttpResponse("Not logged in")
 
+@csrf_exempt
 def login_page(request):
-    return render(request, 'authentication/login.html')
+    # json_convert_to_python_dictionary = json.loads(request.body)
+    # email = json_convert_to_python_dictionary['email']
+    # password = json_convert_to_python_dictionary['password']
+    email = "test@gmail.com"
+    password = "password"
+    user = authenticate(request, username=email, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponse("Successfully Logged in")
+    else:
+        return HttpResponse("Failed to login")
+    
+@csrf_exempt        
+def logout_page(request):
+    logout(request)
+    return HttpResponse("Logged out")
+
+@login_required
+def hidden_page(request):
+    return HttpResponse("Hidden page, You are still logged in")
 
 
 
