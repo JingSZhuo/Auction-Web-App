@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpRequest
+from django.http import HttpResponse, JsonResponse
 from .models import Item, CustomUserManager, CustomUser
 from django.views.generic.edit import CreateView
+
+"""Authentication packages"""
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 """JSON import"""
 import json
@@ -80,6 +83,10 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return HttpResponse("Logged out")
+
+@login_required
+def hidden_page(request):
+    return HttpResponse("Hidden page, You are still logged in")
 
 
 

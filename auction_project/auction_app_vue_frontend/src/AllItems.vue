@@ -51,7 +51,7 @@ import Header from './components/Header.vue'
     },
     methods: {
         async fetchItems() {
-            let response = await fetch("http://localhost:8000/api/addItems/");       //GET request
+            let response = await fetch("http://127.0.0.1:8000/api/addItems/");       //GET request
             let data = await response.json();
             this.items = data;
         },

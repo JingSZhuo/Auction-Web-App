@@ -31,35 +31,35 @@
 
     methods: {
         async Login () {
-
             const loginDetails = {
-                email: this.email_field as string,
-                password: this.password_field as string
+                email: this.email_field,
+                password: this.password_field
             }
 
-            await fetch('http://localhost:8000/login/' , { 
+            await fetch('http://127.0.0.1:8000/login/' , { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(loginDetails),
-                credentials: 'include',
+                credentials: 'include',                  //Include credentials
                 mode: 'cors',
-            }),
-            console.log("Successfully logged in ")
+            })
         },
-        async redirect () {
+        async redirect () {                          //To test login/logout status
 
-            await fetch('http://localhost:8000/redirect/' , { 
+            await fetch('http://127.0.0.1:8000/redirect/' , { 
                 method: 'GET',
                 mode: 'cors',
                 })
+                
         },
         async logout () {
 
-            await fetch('http://localhost:8000/logout/' , { 
+            await fetch('http://127.0.0.1:8000/logout/' , { 
                 method: 'GET',
                 mode: 'cors',
+                credentials: 'include',               //Include credentials
                 })
             },
         }

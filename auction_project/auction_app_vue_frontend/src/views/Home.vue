@@ -5,8 +5,8 @@
     <div>   
             <router-link to="/allItems">List All Items</router-link>|
             <router-link to="/addItem">Add Item</router-link>|
-            <router-link to="/signUp">Signup</router-link>
-            
+            <router-link to="/signUp">Signup</router-link>|
+            <router-link to="/login" >Login</router-link>
             <router-view/>                   <!--Shows the component when a router-link is clicked-->
     </div>
     
