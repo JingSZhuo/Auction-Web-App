@@ -6,7 +6,7 @@
     <h3>{{item_auctionfinish}}</h3>
     <div>{{item_picture}}</div>
 
-    <div>
+    <div id="bidding_form">
       <h1>Bid for Item</h1>
       <label>Email:</label><br>
       <input type="text" v-model="email"><br>
@@ -26,12 +26,16 @@ import { useRoute, useRouter } from 'vue-router';
 import { computed, ComputedRef, defineComponent } from 'vue';
 import Header from '../components/Header.vue'
 
+import { isTemplateNode } from '@vue/compiler-core';
+
+
 export default defineComponent({
     components: {Header},
     setup(){
         const router = useRoute()
         const itemId = computed(() => router.params.id) as ComputedRef<string>
             return {itemId}
+        
     },
 
     data() {
@@ -46,15 +50,7 @@ export default defineComponent({
         };
     },
     methods: {
-        async fetchItems() {
-            //perorm an Ajax request to fetch the list of item
-            let response = await fetch("http://localhost:8000/api/addItems/");
-            let data = await response.json();
-            this.items = data;
-            console.log(this.items);
-        },
     async bidItem(email: string, item_sprice: number){
-          //Ajax request to say that this is the new item model
           const updated_data = {
               updated_email: this.email,
               updated_sprice: this.item_sprice,
@@ -68,9 +64,25 @@ export default defineComponent({
               body: JSON.stringify(updated_data),
           })
           .then((response) => response.json())
-          this.fetchItems()
-        },
+    }
 })
+
+
+const bidForm = document.getElementById('bidding_form');
+
+const currentDate = new Date()
+const endDate = item_auctionfinish
+// const endDate = datetime.datetime.strptime(item_auctionfinish, "%d/%m/%Y %H:%M")
+
+if (currentDate > endDate){
+    console.log("end of bid")
+    //remove bid form for item 
+    bidForm.style.display = 'none'
+    //make last upated price of item be the final price of the item
+    item_sprice = updated_sprice
+    
+    //send email to mf with last bid
+}
   
 
 </script>
