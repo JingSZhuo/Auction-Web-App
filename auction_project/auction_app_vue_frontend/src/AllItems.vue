@@ -15,7 +15,19 @@
                 Description:{{item.item_description}}<br/>
                 Price: {{item.item_sprice}}<br/>
                 Picture: {{item.item_picture}}<br/>
-                Auction Finish: {{item.item_auctionfinish}}<br/><br/>
+                Auction Finish: {{item.item_auctionfinish}}<br/>
+                Highest Bid: {{item.item_personHighestBid}}<br/>
+
+                <div id="bidding_form">
+                    <h1>Bid for Item</h1>
+                    <label>Email:</label><br>
+                    <input type="text" v-model="email"><br>
+
+                    <label>Bid:</label><br>
+                    <input type="number" v-model="item_sprice"><br>
+
+                    <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
+                </div>
             </div>
         </div>
         <div v-else>
@@ -24,7 +36,19 @@
             Description:{{item.item_description}}<br/>
             Price: {{item.item_sprice}}<br/>
             Picture: {{item.item_picture}}<br/>
-            Auction Finish: {{item.item_auctionfinish}}<br/><br/>
+            Auction Finish: {{item.item_auctionfinish}}<br/>
+            Highest Bid: {{item.item_personHighestBid}}<br/>
+
+            <div id="bidding_form">
+                    <h1>Bid for Item</h1>
+                    <label>Email:</label><br>
+                    <input type="text" v-model="email"><br>
+
+                    <label>Bid:</label><br>
+                    <input type="number" v-model="item_sprice"><br>
+
+                    <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
+                </div>
         </div>
     </div>
     <!-- <div>
@@ -46,7 +70,9 @@ import Header from './components/Header.vue'
     data() {
         return {
             items: [] as any[],
-            search: '' as any
+            search: '' as any,
+            email: '' as string,
+            item_sprice: 0 as number
         };
     },
     methods: {
@@ -55,6 +81,23 @@ import Header from './components/Header.vue'
             let data = await response.json();
             this.items = data;
         },
+        async bidItem(id:number,email: string, item_sprice: number){
+          const updated_data = {
+            item_id:id,
+            updated_email: email,
+            updated_sprice: item_sprice,
+
+          }
+          await fetch("http://localhost:8000/api/addItems/" , {
+              method: "PUT",
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(updated_data),
+          })
+          .then((response) => response.json())
+          this.fetchItems()
+    }
 
     },
     mounted(){

@@ -48,7 +48,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(max_length=254, unique=True, default="")
-    date_of_birth = models.DateField(default="")
+    date_of_birth = models.DateField(default="2000-01-01")
     profilePicture = models.ImageField(default="")
 
     USERNAME_FIELD = 'email'
@@ -132,5 +132,6 @@ class Item(models.Model):
             'item_description': self.item_description,
             'item_sprice': self.item_sprice,
             'item_picture': self.item_picture,
-            'item_auctionfinish': self.item_auctionfinish
+            'item_auctionfinish': self.item_auctionfinish,
+            'item_personHighestBid':self.item_personHighestBid
         }

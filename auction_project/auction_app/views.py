@@ -42,6 +42,30 @@ def addItems_api(request):
             item_auctionfinish = json_convert_to_dict['itemActionFinish'],
         ) 
         return JsonResponse(item.to_dict())
+
+    elif request.method == 'PUT':
+        json_convert_to_dict = json.loads(request.body)
+
+        identifier=json_convert_to_dict['item_id']
+        print("itemID")
+        print(identifier)
+
+        getID=Item.objects.get(pk=identifier)
+
+        getID.item_personHighestBid=json_convert_to_dict['updated_email']
+        print(getID.item_personHighestBid)
+        getID.item_sprice=json_convert_to_dict['updated_sprice']
+        getID.save()
+
+        return JsonResponse({
+            'items' :[
+                data.to_dict()
+                for data in Item.objects.all()
+            
+            ]        
+        })
+
+
     else:
         pass
 
