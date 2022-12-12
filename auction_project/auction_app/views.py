@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 """JSON import"""
 import json
 
+
 """CSRF EXEMPTION"""
 from django.views.decorators.csrf import csrf_exempt
 
@@ -60,24 +61,45 @@ def signup_page(request):
 
 @csrf_exempt
 def redirect_page(request):
-    if request.user.is_authenticated:
-        return HttpResponse("Logged in")
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return HttpResponse("Logged in")
+        else:
+            return HttpResponse("Not logged in")
     else:
-        return HttpResponse("Not logged in")
+        return HttpResponse("Null")
 
 @csrf_exempt
 def login_page(request):
-    # json_convert_to_python_dictionary = json.loads(request.body)
+    if request.method == 'POST':
+        email_json = json.loads(request.body)['email']
+        password_json = json.loads(request.body)['password']
+        user = authenticate(request, username=email_json, password=password_json)
+        if user is not None:
+            login(request, user)
+            return HttpResponse("Successfully Logged in")
+        else:
+            return HttpResponse("Failed to login with: " + email_json + " " + password_json)
+    if request.method == 'GET': 
+            if request.user.is_authenticated:
+                return HttpResponse("Logged in")
+            else:
+                return HttpResponse("Not logged in")
+    #json_convert_to_python_dictionary = json.loads(request.body)
+    # #print(json_convert_to_python_dictionary)
     # email = json_convert_to_python_dictionary['email']
     # password = json_convert_to_python_dictionary['password']
-    email = "test@gmail.com"
-    password = "password"
-    user = authenticate(request, username=email, password=password)
-    if user is not None:
-        login(request, user)
-        return HttpResponse("Successfully Logged in")
-    else:
-        return HttpResponse("Failed to login")
+    # email_string = json.dumps(email)
+    # password_string = json.dumps(password)
+    # print(email_string + " " + password_string)
+    # email = "test@gmail.com"
+    # password = "password"
+    # user = authenticate(request, username=request.POST['email'], password=request.POST['password'])
+    # if user is not None:
+    #     login(request, user)
+    #     return HttpResponse("Successfully Logged in")
+    # else:
+    #     return HttpResponse("Failed to login with: "+ email+ " "+ password)
     
 @csrf_exempt        
 def logout_page(request):

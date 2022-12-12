@@ -6,9 +6,9 @@
 
     <br/>
 
-    <input type="email" placeholder="email.." v-model="email_field"> <br><br>
+    <input type="email" placeholder="email.." v-model="email_field" name="email"> <br><br>
 
-    <input type="password" placeholder="password..." v-model="password_field"/> <br><br>
+    <input type="password" placeholder="password..." v-model="password_field" name="password"/> <br><br>
 
     <button @click="redirect">Check</button>
     <button @click="Login">Login</button>
@@ -37,14 +37,14 @@
             }
 
             await fetch('http://127.0.0.1:8000/login/' , { 
-                method: 'POST',
+                method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(loginDetails),
                 credentials: 'include',                  //Include credentials
-                mode: 'cors',
             })
+            .then((response) => response.json())
         },
         async redirect () {                          //To test login/logout status
 
