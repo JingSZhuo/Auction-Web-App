@@ -109,11 +109,13 @@ def useremail_api(request):
     if request.method == 'PUT':
         json_convert_to_dict = json.loads(request.body)
 
-        identifier=json_convert_to_dict['user_email']
+        identifier=json_convert_to_dict['user_id']
         print("userID")
         print(identifier)
 
         getuserID1=CustomUser.objects.get(pk=identifier)
+
+        print(getuserID1)
 
         getuserID1=json_convert_to_dict['updated_email']
         getuserID1.save()
@@ -133,7 +135,7 @@ def userdob_api(request):
     if request.method == 'PUT':
         json_convert_to_dict = json.loads(request.body)
 
-        identifier=json_convert_to_dict['user_dob']
+        identifier=json_convert_to_dict['user_id']
         print("userID")
         print(identifier)
 
