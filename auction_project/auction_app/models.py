@@ -48,7 +48,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(max_length=254, unique=True, default="")
-    date_of_birth = models.DateField(default="2000-01-01")
+    date_of_birth = models.DateField(null=True, blank=True)
     profilePicture = models.ImageField(default="")
 
     USERNAME_FIELD = 'email'
@@ -103,7 +103,7 @@ class Item(models.Model):
     item_description=models.CharField(max_length=2000)
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
     item_picture=models.CharField(max_length=254)
-    item_auctionfinish=models.DateTimeField()
+    item_auctionfinish=models.DateTimeField(null=True, blank=True)
     item_personHighestBid=models.CharField(max_length=254, default="tbd")
 
     def __str__(self):
