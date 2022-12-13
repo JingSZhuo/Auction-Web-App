@@ -1,21 +1,21 @@
 <template>
   <div v-for="(user, user_id) in (users['users' as unknown as number])" :key="user_id">
     <h1>User Profile</h1>
-    <div>{{user.profilePicture}}</div>
+    <div>{{user['user_profilePicture']}}</div>
     <button @click="ChangePic=!ChangePic">Change Profile Picture</button><br>
     <div v-if="ChangePic==true">
       <input type="text" v-model="new_pic">
       <!-- <button @click="SavePic(user.id,user.new_pic)"></button> -->
     </div>
     <h3>Email</h3>
-    <div>{{user.email}}</div>
+    <div>{{user['user_email']}}</div>
     <button @click="ChangeEmail=!ChangeEmail">Change Email</button><br>
     <div v-if="ChangeEmail==true">
       <input type="text" v-model="new_email">
       <button @click="SaveEmail(user.id,user.new_email)"></button>
     </div>
     <h3>Date of Birth</h3>
-    <div>{{user.date_of_birth}}</div>
+    <div>{{user['user_dob']}}</div>
     <button @click="ChangeDOB=!ChangeDOB">Change Date of Birth</button><br>
     <div v-if="ChangeDOB==true">
       <input type="date" v-model="new_dob">
