@@ -225,12 +225,15 @@ def signup_view(request):
 
 @csrf_exempt
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('http://127.0.0.1:5173/')
-    form = CustomUserLoginForm()
-    return render(request, 'authentication/login.html', {'form': form})
+    if request.user.is_authenticated:
+        return redirect('http://127.0.0.1:5173/')
+    else:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('http://127.0.0.1:5173/')
+        form = CustomUserLoginForm()
+        return render(request, 'authentication/login.html', {'form': form})
