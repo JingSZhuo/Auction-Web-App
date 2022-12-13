@@ -11,8 +11,6 @@ admin.site.register(Item)
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    add_form = CustomUserSignupForm
-    form = CustomUserChangeForm
     
     list_display = ('email', 'is_staff', 'is_active', 'date_of_birth', 'profilePicture')
     list_filter = ('email', 'is_staff', 'is_active',)

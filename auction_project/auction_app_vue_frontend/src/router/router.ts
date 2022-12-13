@@ -5,6 +5,7 @@ import AddItem from '../views/AddItem.vue'
 import SignUp from '../views/signup.vue'
 import Login from '../views/login.vue'
 import AllItems from '../AllItems.vue'
+import Logout from '../views/logout.vue'
 
 //below: dynamically routed! 
 //const Home = import('../views/Home.vue')
@@ -39,6 +40,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: Logout
     },
 
     // {

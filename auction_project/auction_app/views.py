@@ -4,7 +4,7 @@ from .models import Item, CustomUserManager, CustomUser
 from django.views.generic.edit import CreateView
 
 """Form imports"""
-from .forms import CustomUserSignupForm
+from .forms import CustomUserSignupForm, CustomUserLoginForm
 
 """Authentication packages"""
 from django.contrib.auth import login, authenticate, logout
@@ -175,22 +175,6 @@ def redirect_page(request):
     else:
         return HttpResponse("Null")
 
-@csrf_exempt
-def login_page(request):
-    if request.method == 'POST':
-        email_json = json.loads(request.body)['email']
-        password_json = json.loads(request.body)['password']
-        user = authenticate(request, username=email_json, password=password_json)
-        if user is not None:
-            login(request, user)
-            return HttpResponse("Successfully Logged in")
-        else:
-            return HttpResponse("Failed to login with: " + email_json + " " + password_json)
-    if request.method == 'GET': 
-            if request.user.is_authenticated:
-                return HttpResponse("Logged in")
-            else:
-                return HttpResponse("Not logged in")
     #json_convert_to_python_dictionary = json.loads(request.body)
     # #print(json_convert_to_python_dictionary)
     # email = json_convert_to_python_dictionary['email']
@@ -210,14 +194,14 @@ def login_page(request):
 @csrf_exempt        
 def logout_page(request):
     logout(request)
-    return HttpResponse("Logged out")
+    return redirect("http://127.0.0.1:8000")
 
 @login_required
 def hidden_page(request):
     return HttpResponse("Hidden page, You are still logged in")
 
 @csrf_exempt
-def signup(request):
+def signup_view(request):
     if request.user.is_authenticated:
         return redirect('http://127.0.0.1:5173/')
     else:
@@ -225,8 +209,13 @@ def signup(request):
             form = CustomUserSignupForm(request.POST)         #user input data passed into form
             if form.is_valid():
                 print(request.POST['email'], request.POST['password1'])
-                new_user = CustomUser.object.create_user(request.POST['email'], request.POST['password1'], "2022-02-02", "png.png")
+                new_user = CustomUser.object.create_user(request.POST['email'], request.POST['password1'], "2000-01-01", "profile.png")
                 new_user.save()
+                print("created newuser: ", new_user)
+                email = request.POST['email']
+                password = request.POST['password1']
+                user = authenticate(request, username=email, password=password)
+                login(request, user)
                 return redirect('http://127.0.0.1:5173/')
             else:
                 print(request.POST['email'], request.POST['password1'], request.POST['password2'],"Invalid")
@@ -234,10 +223,14 @@ def signup(request):
         form = CustomUserSignupForm()   
         return render(request, 'authentication/signup.html', {'form': form})
 
-
-
-# def car_api(request: HttpRequest, car_id: int) -> HttpResponse:
-#     car = get_object_or_404(Car, id=car_id)
-
-#     if request.method == 'GET':
-#         return JsonResponse(car.to_dict())
+@csrf_exempt
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('http://127.0.0.1:5173/')
+    form = CustomUserLoginForm()
+    return render(request, 'authentication/login.html', {'form': form})
