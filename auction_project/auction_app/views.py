@@ -73,6 +73,85 @@ def addItems_api(request):
         pass
 
 @csrf_exempt
+def usertest_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'users': [
+                user.to_dict()
+                for user in CustomUser.objects.all()
+            ]
+        })
+
+    elif request.method == 'PUT':
+        json_convert_to_dict = json.loads(request.body)
+
+        identifier=json_convert_to_dict['user_id']
+        print("userID")
+        print(identifier)
+
+        getuserID=CustomUser.objects.get(pk=identifier)
+
+        getuserID=json_convert_to_dict['updated_pic']
+        getuserID.save()
+
+        return JsonResponse({
+            'users' :[
+                data.to_dict()
+                for data in CustomUser.objects.all()
+            
+            ]        
+        })
+    else:
+        pass
+
+@csrf_exempt
+def useremail_api(request):
+    if request.method == 'PUT':
+        json_convert_to_dict = json.loads(request.body)
+
+        identifier=json_convert_to_dict['user_email']
+        print("userID")
+        print(identifier)
+
+        getuserID1=CustomUser.objects.get(pk=identifier)
+
+        getuserID1=json_convert_to_dict['updated_email']
+        getuserID1.save()
+
+        return JsonResponse({
+            'users' :[
+                data.to_dict()
+                for data in CustomUser.objects.all()
+            
+            ]        
+        })
+    else:
+        pass
+
+@csrf_exempt
+def userdob_api(request):
+    if request.method == 'PUT':
+        json_convert_to_dict = json.loads(request.body)
+
+        identifier=json_convert_to_dict['user_dob']
+        print("userID")
+        print(identifier)
+
+        getuserID2=CustomUser.objects.get(pk=identifier)
+
+        getuserID2=json_convert_to_dict['updated_dob']
+        getuserID2.save()
+
+        return JsonResponse({
+            'users' :[
+                data.to_dict()
+                for data in CustomUser.objects.all()
+            ]        
+        })
+    else:
+        pass
+    
+@csrf_exempt
 def signup_page(request):
     if request.method == 'POST':
         json_convert_to_python_dictionary = json.loads(request.body)
