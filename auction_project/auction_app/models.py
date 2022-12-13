@@ -17,7 +17,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(
             email=email,
             date_of_birth=date_of_birth,
-            profilePicture="",
+            profilePicture=profile_picture,
             **extra_fields
         )
         user.set_password(password)

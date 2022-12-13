@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Item, CustomUserManager, CustomUser
 from django.views.generic.edit import CreateView
+
+"""Form imports"""
+from .forms import CustomUserSignupForm
 
 """Authentication packages"""
 from django.contrib.auth import login, authenticate, logout
@@ -133,6 +136,24 @@ def logout_page(request):
 @login_required
 def hidden_page(request):
     return HttpResponse("Hidden page, You are still logged in")
+
+@csrf_exempt
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('http://127.0.0.1:5173/')
+    else:
+        if request.method == 'POST':
+            form = CustomUserSignupForm(request.POST)         #user input data passed into form
+            if form.is_valid():
+                print(request.POST['email'], request.POST['password1'])
+                new_user = CustomUser.object.create_user(request.POST['email'], request.POST['password1'], "2022-02-02", "png.png")
+                new_user.save()
+                return redirect('http://127.0.0.1:5173/')
+            else:
+                print(request.POST['email'], request.POST['password1'], request.POST['password2'],"Invalid")
+        #Any requests that is NOT POST (i.e. page refreshes) 
+        form = CustomUserSignupForm()   
+        return render(request, 'authentication/signup.html', {'form': form})
 
 
 
