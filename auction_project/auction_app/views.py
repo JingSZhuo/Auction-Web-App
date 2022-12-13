@@ -120,15 +120,13 @@ def useremail_api(request):
         getuserID1=json_convert_to_dict['updated_email']
         getuserID1.save()
 
-        return JsonResponse({
-            'users' :[
-                data.to_dict()
-                for data in CustomUser.objects.all()
-            
-            ]        
-        })
-    else:
-        pass
+    return JsonResponse({
+        'users' :[
+            data.to_dict()
+            for data in CustomUser.objects.all()
+        
+        ]        
+    })
 
 @csrf_exempt
 def userdob_api(request):
@@ -144,14 +142,13 @@ def userdob_api(request):
         getuserID2=json_convert_to_dict['updated_dob']
         getuserID2.save()
 
-        return JsonResponse({
-            'users' :[
-                data.to_dict()
-                for data in CustomUser.objects.all()
-            ]        
-        })
-    else:
-        pass
+    return JsonResponse({
+        'users' :[
+            data.to_dict()
+            for data in CustomUser.objects.all()
+        ]        
+    })
+
     
 @csrf_exempt
 def signup_page(request):
