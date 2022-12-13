@@ -5,7 +5,7 @@
     <button @click="ChangePic=!ChangePic">Change Profile Picture</button><br>
     <div v-if="ChangePic==true">
       <input type="text" v-model="new_pic">
-      <button @click="SavePic(user.id,user.new_pic)"></button>
+      <!-- <button @click="SavePic(user.id,user.new_pic)"></button> -->
     </div>
     <h3>Email</h3>
     <div>{{user.email}}</div>
@@ -18,7 +18,7 @@
     <div>{{user.date_of_birth}}</div>
     <button @click="ChangeDOB=!ChangeDOB">Change Date of Birth</button><br>
     <div v-if="ChangeDOB==true">
-      <input type="text" v-model="new_dob">
+      <input type="date" v-model="new_dob">
       <button @click="SaveDOB(user.id,user.new_dob)"></button>
     </div>
   </div>
@@ -34,31 +34,31 @@
             ChangeDOB: false as boolean,
             new_pic: '' as string,
             new_email: '' as string,
-            new_dob: '' as string
+            new_dob: '' as unknown as Date
         };
     },
     methods: {
       async fetchUsers() {
-            let response = await fetch("http://127.0.0.1:8000/api/usertest_api/");       //GET request
+            let response = await fetch("http://127.0.0.1:8000/api/usertest_api");       //GET request
             let data = await response.json();
             this.users = data;
         },
-        async SavePic(id:number,pic: string){
-          const updated_pic = {
-            user_id:id,
-            user_pic:pic
+        // async SavePic(id:number,pic: string){
+        //   const updated_pic = {
+        //     user_id:id,
+        //     user_pic:pic
 
-          }
-          await fetch("http://127.0.0.1:8000/api/usertest_api/" , {
-              method: "PUT",
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(updated_pic),
-          })
-          .then((response) => response.json())
-          this.fetchUsers()
-        },
+        //   }
+        //   await fetch("http://127.0.0.1:8000/api/usertest_api" , {
+        //       method: "PUT",
+        //       headers: {
+        //           'Content-Type': 'application/json',
+        //       },
+        //       body: JSON.stringify(updated_pic),
+        //   })
+        //   .then((response) => response.json())
+        //   this.fetchUsers()
+        // },
 
         async SaveEmail(id:number,email: string){
           const updated_email = {
@@ -66,7 +66,7 @@
             user_email:email
 
           }
-          await fetch("http://127.0.0.1:8000/api/useremail_api/" , {
+          await fetch("http://127.0.0.1:8000/api/useremail_api" , {
               method: "PUT",
               headers: {
                   'Content-Type': 'application/json',
@@ -83,7 +83,7 @@
             user_dob:dob
 
           }
-          await fetch("http://127.0.0.1:8000/api/userdob_api/" , {
+          await fetch("http://127.0.0.1:8000/api/userdob_api" , {
               method: "PUT",
               headers: {
                   'Content-Type': 'application/json',

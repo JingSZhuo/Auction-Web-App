@@ -49,7 +49,7 @@ class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(max_length=254, unique=True, default="")
     date_of_birth = models.DateField(null=True, blank=True)
-    profilePicture = models.ImageField(default="")
+    profilePicture = models.CharField(max_length=254, default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -104,7 +104,7 @@ class Item(models.Model):
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
     item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField(null=True, blank=True)
-    item_personHighestBid=models.CharField(max_length=254, default="tbd")
+    item_personHighestBid=models.EmailField(max_length=254, default="tbd")
 
     def __str__(self):
         return self.item_description
