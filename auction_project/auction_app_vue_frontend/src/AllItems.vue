@@ -1,5 +1,6 @@
 <template>
-        <div>
+
+    <div>
         <br/>
         <h1>All Items</h1>
         <!-- <Header></Header> -->
@@ -7,7 +8,70 @@
         <input type="text" v-model="search">
         
     </div>
-    <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
+    <div>
+        <table class="table border border-success w-100">
+            <tr class="table border border-warning ">
+                <th style="width: 10%;">ID</th>
+                <th style="width: 10%;">Title</th>
+                <th style="width: 20%;">Description</th>
+                <th style="width: 10%;">Price</th>
+                <th style="width: 10%;">Picture</th>
+                <th style="width: 10%;">Auction-End-Date</th>
+                <th style="width: 10%;">Highest Bidder</th>
+            </tr>
+        </table>
+        <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
+            <div v-if="search!=''">
+                <div class="d-flex flex-column" v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
+                    <div class="d-flex flex-row p-2">
+                        <div class="mx-3"> {{item.id}}</div>
+                        <div class="mx-3"> {{item.item_title}}</div>
+                        <div class="mx-3"> {{item.item_description}}</div>
+                        <div class="mx-3"> {{item.item_sprice}}</div>
+                        <div class="mx-3"> {{item.item_picture}}</div>
+                        <div class="mx-3"> {{item.item_auctionfinish}}</div>
+                        <div class="mx-3"> {{item.item_personHighestBid}}</div>
+                    </div>
+
+                    <div class="d-flex flex-row p-2"  id="bidding_form">
+                        <h3>Bid for Item</h3>
+                        <label class="w-auto m-auto" >Email:</label><br>
+                        <input type="text" v-model="email"><br>
+
+                        <label class="w-auto m-auto">Bid:</label><br>
+                        <input type="number" v-model="item_sprice"><br>
+
+                        <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column" v-else>
+                <table class="table border border-success w-100">
+                    
+                    <tr>
+                        <td style="width: 10%; word-wrap: break-word;" > {{item.id}}</td>
+                        <td style="width: 10%; word-wrap: break-word;" > {{item.item_title}}</td>
+                        <td style="width: 20%; word-wrap: break-word;"> {{item.item_description}}</td>
+                        <td style="width: 10%; word-wrap: break-word;"> {{item.item_sprice}}</td>
+                        <td style="width: 10%; word-wrap: break-word;"> {{item.item_picture}}</td>
+                        <td style="width: 10%; word-wrap: break-word;"> {{item.item_auctionfinish}}</td>
+                        <td style="width: 10%; word-wrap: break-word;"> {{item.item_personHighestBid}}</td>
+                    </tr>
+                </table>
+                <div class="d-flex flex-row p-2" id="bidding_form">
+                        <h3>Bid for Item</h3>
+                        <label class="w-auto m-auto">Email:</label><br>
+                        <input type="text" v-model="email"><br>
+
+                        <label class="w-auto m-auto">Bid:</label><br>
+                        <input type="number" v-model="item_sprice"><br>
+
+                        <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
         <div v-if="search!=''">
             <div v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
                 ID:{{item.id}}<br/>
@@ -50,7 +114,7 @@
                     <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                 </div>
         </div>
-    </div>
+    </div> -->
     <!-- <div>
         <a href="./views/AddItem.vue">
             <button type="button">Add Item Here</button>
