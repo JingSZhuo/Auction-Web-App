@@ -105,6 +105,8 @@ class Item(models.Model):
     item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField(null=True, blank=True)
     item_personHighestBid=models.EmailField(max_length=254, default="tbd")
+    item_image=models.ImageField(upload_to='./auction_app_vue_frontend/src/Images', height_field=50, width_field=50, max_length=100, null=True, default=None)
+
 
     def __str__(self):
         return self.item_description
