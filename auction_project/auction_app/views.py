@@ -89,10 +89,10 @@ def usertest_api(request):
         print("userID")
         print(identifier)
 
-        getuserID=CustomUser.objects.get(pk=identifier)
+        getID=CustomUser.objects.get(pk=identifier)
 
-        getuserID=json_convert_to_dict['updated_pic']
-        getuserID.save()
+        getID=json_convert_to_dict['updated_pic']
+        getID.save()
 
         return JsonResponse({
             'users' :[
@@ -106,6 +106,13 @@ def usertest_api(request):
 
 @csrf_exempt
 def useremail_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'users': [
+                user.to_dict()
+                for user in CustomUser.objects.all()
+            ]
+        })
     if request.method == 'PUT':
         json_convert_to_dict = json.loads(request.body)
 
@@ -113,12 +120,13 @@ def useremail_api(request):
         print("userID")
         print(identifier)
 
-        getuserID1=CustomUser.objects.get(pk=identifier)
+        getID=CustomUser.objects.get(pk=identifier)
 
-        print(getuserID1)
+        print(getID)
 
-        getuserID1=json_convert_to_dict['updated_email']
-        getuserID1.save()
+        getID.email=json_convert_to_dict['user_email']
+        print(getID)
+        getID.save()
 
     return JsonResponse({
         'users' :[
@@ -130,6 +138,13 @@ def useremail_api(request):
 
 @csrf_exempt
 def userdob_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'users': [
+                user.to_dict()
+                for user in CustomUser.objects.all()
+            ]
+        })
     if request.method == 'PUT':
         json_convert_to_dict = json.loads(request.body)
 
@@ -137,10 +152,11 @@ def userdob_api(request):
         print("userID")
         print(identifier)
 
-        getuserID2=CustomUser.objects.get(pk=identifier)
+        getID=CustomUser.objects.get(pk=identifier)
+        print(getID)
 
-        getuserID2=json_convert_to_dict['updated_dob']
-        getuserID2.save()
+        getID.date_of_birth=json_convert_to_dict['user_dob']
+        getID.save()
 
     return JsonResponse({
         'users' :[
