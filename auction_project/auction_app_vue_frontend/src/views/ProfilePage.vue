@@ -1,13 +1,28 @@
 <template>
-  <div v-for="(user, user_id) in (users['users' as unknown as number])" :key="user_id">
-    <!-- <div v-if="user.is_autenticated"> -->
+  <div>
+    <h1>Email</h1>
+    <div>{{profile['username' as unknown as any]}}</div>
+    <button @click="ChangeEmail=!ChangeEmail">Change Email</button><br>
+        <div v-if="ChangeEmail==true">
+          <input type="text" v-model="new_email">
+          <button @click="SaveEmail(profile['id' as unknown as number],new_email)">Change Email</button>
+        </div>
+    <h1>Date of Birth</h1>
+    <div>{{profile['date_of_birth' as unknown as any]}}</div>
+    <button @click="ChangeDOB=!ChangeDOB">Change Date of Birth</button><br>
+        <div v-if="ChangeDOB==true">
+          <input type="date" v-model="new_dob">
+          <button @click="SaveDOB(profile['id' as unknown as number],new_dob)"></button>
+        </div>
+  </div>
+  <!-- <div v-for="(user, user_id) in (users['users' as unknown as number])" :key="user_id">
         <h1>User Profile</h1>
         <div>{{user['user_profilePicture']}}</div>
         <button @click="ChangePic=!ChangePic">Change Profile Picture</button><br>
         <div v-if="ChangePic==false">
           <input type="file" name="upload_image" alt="image_upload">
           <button @click="changeProfilePicture">Upload Image</button>
-          <!-- <button @click="SavePic(user.id,user.new_pic)"></button> -->
+          <button @click="SavePic(user.id,user.new_pic)"></button> 
         </div>
         <h3>Email</h3>
         <div>{{user['user_email']}}</div>
@@ -23,15 +38,14 @@
           <input type="date" v-model="new_dob">
           <button @click="SaveDOB(user.id,new_dob)"></button>
         </div>
-        <img src="../../../BSc_Computer_Science_Learning_Outcomes_HxceIAm.png" width="50" height="50" alt="item_image">
-      <!-- </div> -->
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
   export default{
     data() {
         return {
+            profile: [] as any[],
             users: [] as any[],
             ChangePic: false as boolean,
             ChangeEmail: false as boolean,
@@ -42,10 +56,18 @@
         };
     },
     methods: {
-      async fetchUsers() {
+        async fetchUsers() {
             let response = await fetch("http://127.0.0.1:8000/api/usertest_api");       //GET request
             let data = await response.json();
             this.users = data;
+        },
+        async fetchProfile () {
+            let fetchingUser = await fetch("http://127.0.0.1:8000/fetchuser/" , {
+              credentials: 'include'
+            });
+            let data = await fetchingUser.json();
+            this.profile = data
+            console.log("Data", data)
         },
         // async SavePic(id:number,pic: string){
         //   const updated_pic = {
@@ -110,7 +132,8 @@
         }
   },
   mounted(){
-    this.fetchUsers()
+    //this.fetchUsers(),
+    this.fetchProfile()
   },
 }
 </script>

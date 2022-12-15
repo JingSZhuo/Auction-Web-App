@@ -23,4 +23,5 @@ urlpatterns = [
 
     #login_only_pages
     path('hidden/', views.hidden_page, name="hidden"),
+    path('fetchuser/', views.display_profile)
 ]

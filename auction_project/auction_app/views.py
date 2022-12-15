@@ -252,7 +252,6 @@ def login_view(request):
                 return redirect('http://127.0.0.1:5173/')
         form = CustomUserLoginForm()
         return render(request, 'authentication/login.html', {'form': form})
-<<<<<<< HEAD
     
 
 @csrf_exempt
@@ -260,10 +259,17 @@ def profile_change(request):
     if request.method == 'POST':
         print("Uploaded..?" , request.body)
         return HttpResponse()
-=======
 
 
-# @csrf_exempt
-# def check_login(request):
-#     if request.user.is_authenticated:
->>>>>>> acd37c63d47bcb5271adfd78473f5e42ed3f39ab
+@csrf_exempt
+def display_profile(request):
+    if request.user.is_authenticated:
+        print("username: " , request.user.username)
+        return JsonResponse(
+            {
+                "id" : request.user.id,
+                "username" : request.user.email,
+                "date_of_birth": request.user.date_of_birth,
+            }
+        )
+    else: return HttpResponse("Not logged in")
