@@ -96,7 +96,7 @@
                                         <div><!--Check if foreign key matches-->
                                             {{question['question_text']}}
                                             <input type="text" v-model="question_text">
-                                            <button @click="postQuestions(question_text,items[item.id])">Post</button>
+                                            <button @click="postQuestions(question_text,item.id)">Post</button>
                                         </div>
                                     </div>
                                 </div>
@@ -201,11 +201,11 @@ var expired:boolean
         //     this.items = data;
         //     console.log("data: ", this.items)
         // },
-        async postQuestions(question_text: string, item: Object){
+        async postQuestions(question_text: string, itemID: number){
           //Ajax request to say that this is the new item model
           const user_form_input = {
             questionText: question_text,
-            itemForeignKey: item,
+            itemForeignKey: itemID,
           }
           await fetch("http://127.0.0.1:8000/api/addQuestions_api/" , {
               method: "POST",

@@ -287,9 +287,11 @@ def addQuestions_api(request):
         })
     if request.method == 'POST':
         json_convert_to_dict = json.loads(request.body)
+        id=json_convert_to_dict['itemForeignKey']
+        item=Item.objects.get(pk=id)
         question = Question.objects.create(
             question_text = json_convert_to_dict['questionText'],
-            question_item = json_convert_to_dict['itemForeignKey']
+            question_item = item
              
         ) 
         return JsonResponse(question.to_dict())
