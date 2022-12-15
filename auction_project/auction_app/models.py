@@ -124,6 +124,12 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.question_text
 
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'question_text': self.question_text,
+        }
+
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answers = models.CharField(max_length=1000)
