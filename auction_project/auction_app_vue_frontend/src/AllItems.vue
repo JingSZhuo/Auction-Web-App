@@ -95,11 +95,13 @@
                                     <div><!--loop through answers-->
                                         <div><!--Check if foreign key matches-->
                                             {{question['question_text']}}
-                                            <input type="text" v-model="question_text">
-                                            <button @click="postQuestions(question_text,item.id)">Post</button>
+                                            <!-- <input type="text" v-model="question_text">
+                                            <button @click="postQuestions(question_text,item.id)">Post</button> -->
                                         </div>
                                     </div>
                                 </div>
+                                <input type="text" v-model="question_text">
+                                <button @click="postQuestions(question_text,item.id)">Post</button>
                             </div>
                         </div>
                 </div>
@@ -215,7 +217,7 @@ var expired:boolean
               body: JSON.stringify(user_form_input),
           })
           .then((response) => response.json())
-          this.fetchItems()
+          this.fetchQuestion()
         },
         // async postAnswers(){
         //   //Ajax request to say that this is the new item model
