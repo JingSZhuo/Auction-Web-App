@@ -88,17 +88,6 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
                     <div class="d-flex flex-row p-2"  id="bidding_form">
-<<<<<<< HEAD
-                        <button @click="SeeChat()">See Chat</button>
-                        <div v-if="seeChat==true">
-                            text
-                            <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
-                                <div><!--loop through answers-->
-                                    <div><!--Check if foreign key matches-->
-                                        {{question['question_text']}}
-                                        <!-- <input type="text" v-model="question_text">
-                                        <button @click="postQuestions(question_text,item.id)">Post</button> -->
-=======
                             <button @click="SeeChat()">See Chat</button>
                             <div v-if="seeChat==true">
                                 text
@@ -109,17 +98,13 @@
                                            {{answer['answer']}} 
                                            
                                         <!-- </div> -->
->>>>>>> 57883dd2402e012e02c1ee70118b0df60daba3a1
                                     </div>
                                     <input type="text" v-model="answer_text">
                                     <button @click="postAnswers(answer_text,question.id)">Post Answer</button>
                                 </div>
-<<<<<<< HEAD
-=======
                                 <input type="text" v-model="question_text">
                                 <button @click="postQuestions(question_text,item.id)">Post Question</button>
                                 
->>>>>>> 57883dd2402e012e02c1ee70118b0df60daba3a1
                             </div>
                             <input type="text" v-model="question_text">
                             <button @click="postQuestions(question_text,item.id)">Post</button>
@@ -127,8 +112,8 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
+
     
 </template>
 
