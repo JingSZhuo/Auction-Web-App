@@ -104,8 +104,8 @@ class Item(models.Model):
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
     item_picture=models.CharField(max_length=254)
     item_auctionfinish=models.DateTimeField(null=True, blank=True)
-    item_personHighestBid=models.EmailField(max_length=254, default="tbd")
-    item_image=models.ImageField(upload_to='./auction_app_vue_frontend/src/Images', height_field=50, width_field=50, max_length=100, null=True, default=None)
+    item_personHighestBid=models.EmailField(max_length=254, default="tbd@tbd.tbd")
+    item_image=models.ImageField(upload_to='./auction_app_vue_frontend/src/Images', max_length=100, null=True, default=None)
 
 
     def __str__(self):
@@ -122,6 +122,9 @@ class Item(models.Model):
 
     def __str__(self) -> str:
         return self.item_personHighestBid
+        
+    def __str__(self) -> str:
+        return self.item_image
     
     def __str__(self):
         return self.item_title
@@ -135,5 +138,6 @@ class Item(models.Model):
             'item_sprice': self.item_sprice,
             'item_picture': self.item_picture,
             'item_auctionfinish': self.item_auctionfinish,
-            'item_personHighestBid':self.item_personHighestBid
+            'item_personHighestBid':self.item_personHighestBid,
+            'item_image': str(self.item_image)
         }

@@ -4,8 +4,9 @@
         <h1>User Profile</h1>
         <div>{{user['user_profilePicture']}}</div>
         <button @click="ChangePic=!ChangePic">Change Profile Picture</button><br>
-        <div v-if="ChangePic==true">
-          <input type="text" v-model="new_pic">
+        <div v-if="ChangePic==false">
+          <input type="file" name="upload_image" alt="image_upload">
+          <button @click="changeProfilePicture">Upload Image</button>
           <!-- <button @click="SavePic(user.id,user.new_pic)"></button> -->
         </div>
         <h3>Email</h3>
@@ -22,6 +23,7 @@
           <input type="date" v-model="new_dob">
           <button @click="SaveDOB(user.id,new_dob)"></button>
         </div>
+        <img src="../../../BSc_Computer_Science_Learning_Outcomes_HxceIAm.png" width="50" height="50" alt="item_image">
       <!-- </div> -->
   </div>
 </template>
@@ -94,6 +96,17 @@
           })
           .then((response) => response.json())
           this.fetchUsers()
+        },
+        async changeProfilePicture () {
+          const formData = new FormData()
+          const fileField = document.querySelector('input[type="file"]')
+
+          formData.append('profile', (fileField as any).files[0] );      //JSON object key-value pairs
+
+          fetch('http://127.0.0.1:8000/api/profilepicture' , {
+            method: 'POST',
+            body: formData
+          })
         }
   },
   mounted(){

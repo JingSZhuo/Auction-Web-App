@@ -19,7 +19,8 @@ urlpatterns = [
     path('api/usertest_api',views.usertest_api),
     path('api/useremail_api',views.useremail_api),
     path('api/userdob_api',views.userdob_api),
-    
+    path('api/profilepicture', views.profile_change),
+
     #login_only_pages
-    path('hidden/', views.hidden_page, name="hidden")
+    path('hidden/', views.hidden_page, name="hidden"),
 ]

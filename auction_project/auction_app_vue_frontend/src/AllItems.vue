@@ -167,13 +167,6 @@ import Header from './components/Header.vue'
     mounted(){
       this.fetchItems()
     },
-    // components: {
-    //     Header,
-    // },
-
-    // setup(){
-    //     const router = useRouter()
-    // }
 }
 
 </script>

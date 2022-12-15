@@ -2,10 +2,9 @@ import { createWebHashHistory, createRouter } from "vue-router";  //importing AP
 import ItemPage from '../views/ItemPage.vue'
 import Home from '../views/Home.vue'
 import AddItem from '../views/AddItem.vue'
-import SignUp from '../views/signup.vue'
-import Login from '../views/login.vue'
 import AllItems from '../AllItems.vue'
 import Logout from '../views/logout.vue'
+import ProfilePage from '../views/ProfilePage.vue'
 
 //below: dynamically routed! 
 //const Home = import('../views/Home.vue')
@@ -25,37 +24,26 @@ const routes = [
         path: '/addItem',
         name: 'AddItem',
         component: AddItem
-    },
-    {
-        path: '/signUp',
-        name: 'signup',
-        component: SignUp
-    },    
+    }, 
     {
         path: '/allItems/:id',
         name: 'ItemPage',
         component: ItemPage
     },
     {
-        path: '/login',
-        name: 'login',
-        component: Login
-    },
-    {
         path: '/logout',
         name: 'logout',
         component: Logout
     },
-
-    // {
-    //     path: '/allItems/:id',
-    //     name: 'ItemPage',
-    //     component: ItemPage
-    // }
     {
         path: '/allItems',
         name: 'AllItems',
         component: AllItems
+    },
+    {
+        path: '/profilePage',
+        name: 'profilepage',
+        component: ProfilePage,
     }
     
 
