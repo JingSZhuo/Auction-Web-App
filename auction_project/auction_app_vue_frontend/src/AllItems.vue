@@ -149,6 +149,7 @@ var expired:boolean
             let response = await fetch("http://127.0.0.1:8000/api/addItems/");       //GET request
             let data = await response.json();
             this.items = data;
+            console.log("data: ", this.items)
         },
         CheckDateTime(finish:Date){
             const now= new Date()
