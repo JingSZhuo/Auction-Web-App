@@ -261,6 +261,7 @@ def profile_change(request):
         return HttpResponse()
 
 
+<<<<<<< HEAD
 @csrf_exempt
 def display_profile(request):
     if request.user.is_authenticated:
@@ -273,3 +274,8 @@ def display_profile(request):
             }
         )
     else: return HttpResponse("Not logged in")
+=======
+# @csrf_exempt
+# def check_login(request):
+#     if request.user.is_authenticated:
+>>>>>>> cffabfbd7d941311b3108217010d49bd8ee8fff9
