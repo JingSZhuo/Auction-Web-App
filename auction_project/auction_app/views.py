@@ -276,7 +276,7 @@ def display_profile(request):
 # @csrf_exempt
 # def check_login(request):
 #     if request.user.is_authenticated:
-
+@csrf_exempt
 def addQuestions_api(request):
     if request.method == 'GET':
         return JsonResponse({
@@ -289,10 +289,11 @@ def addQuestions_api(request):
         json_convert_to_dict = json.loads(request.body)
         question = Question.objects.create(
             question_text = json_convert_to_dict['questionText'],
+            question_item = json_convert_to_dict['itemForeignKey']
              
         ) 
         return JsonResponse(question.to_dict())
-
+@csrf_exempt
 def addAnswers_api(request):
     if request.method == 'GET':
         return JsonResponse({

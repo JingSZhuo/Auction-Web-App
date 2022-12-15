@@ -23,5 +23,8 @@ urlpatterns = [
 
     #login_only_pages
     path('hidden/', views.hidden_page, name="hidden"),
-    path('fetchuser/', views.display_profile)
+    path('fetchuser/', views.display_profile),
+
+    path('api/addQuestions_api/', views.addQuestions_api),
+    path('api/addAnswers_api/', views.addAnswers_api),
 ]

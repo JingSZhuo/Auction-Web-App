@@ -45,10 +45,18 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                         </div>
                         <div class="d-flex flex-row p-2"  id="bidding_form">
-                            <button @click="seeChat=!seeChat">See Chat</button>
-                            <div v-if="seeChat">
-                                <input type="text">
-                                <button>Post</button>
+                            <button @click="SeeChat()">See Chat</button>
+                            <div v-if="seeChat==true">
+                                text
+                                <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
+                                    <div><!--loop through answers-->
+                                        <div><!--Check if foreign key matches-->
+                                            {{question['question_text']}}
+                                            <input type="text" v-model="question_text">
+                                            <button @click="postQuestions(question_text,item.id)">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,13 +88,15 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
                     <div class="d-flex flex-row p-2"  id="bidding_form">
-                            <button @click="seeChat=!seeChat">See Chat</button>
-                            <div v-if="seeChat">
-                                <div> <!--loop through questions-->
+                            <button @click="SeeChat()">See Chat</button>
+                            <div v-if="seeChat==true">
+                                text
+                                <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
                                     <div><!--loop through answers-->
                                         <div><!--Check if foreign key matches-->
-                                            <input type="text">
-                                            <button>Post</button>
+                                            {{question['question_text']}}
+                                            <input type="text" v-model="question_text">
+                                            <button @click="postQuestions(question_text,items[item.id])">Post</button>
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +173,9 @@ var expired:boolean
             search: '' as any,
             email: '' as string,
             item_sprice: 0 as number,
-            seeChat: false as boolean      
+            seeChat: false as boolean,
+            questions: [] as any[],
+            question_text: "" as string,      
         };
     },
     methods: {
@@ -173,6 +185,57 @@ var expired:boolean
             this.items = data;
             console.log("data: ", this.items)
         },
+        async fetchQuestion() {
+            let response = await fetch("http://127.0.0.1:8000/api/addQuestions_api/");       //GET request
+            let data = await response.json();
+            this.questions = data;
+            console.log("data: ", this.questions)
+        },
+        SeeChat(){
+            this.seeChat= (!this.seeChat)
+            this.fetchQuestion()
+        },
+        // async fetchAnswer() {
+        //     let response = await fetch("http://127.0.0.1:8000/api/addAnswers_api/");       //GET request
+        //     let data = await response.json();
+        //     this.items = data;
+        //     console.log("data: ", this.items)
+        // },
+        async postQuestions(question_text: string, item: Object){
+          //Ajax request to say that this is the new item model
+          const user_form_input = {
+            questionText: question_text,
+            itemForeignKey: item,
+          }
+          await fetch("http://127.0.0.1:8000/api/addQuestions_api/" , {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(user_form_input),
+          })
+          .then((response) => response.json())
+          this.fetchItems()
+        },
+        // async postAnswers(){
+        //   //Ajax request to say that this is the new item model
+        //   const user_form_input = {
+        //       itemTitle: this.item_title,
+        //       itemDescription: this.item_description,
+        //       itemStartingPrice: this.item_sprice,
+        //       itemPicture: this.item_picture,
+        //       itemActionFinish: this.item_auctionfinish
+        //   }
+        //   await fetch("http://127.0.0.1:8000/api/addItems/" , {
+        //       method: "POST",
+        //       headers: {
+        //           'Content-Type': 'application/json',
+        //       },
+        //       body: JSON.stringify(user_form_input),
+        //   })
+        //   .then((response) => response.json())
+        //   this.fetchItems()
+        // },
         CheckDateTime(finish:Date){
             const now= new Date()
             const nowInMs= new Date(now).getTime()
