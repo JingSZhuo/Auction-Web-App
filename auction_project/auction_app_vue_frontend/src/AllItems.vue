@@ -22,28 +22,30 @@
         </table>
         <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
             <div v-if="search!=''">
-                <div class="d-flex flex-column" v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
-                    <div class="d-flex flex-row p-2">
-                        <div class="mx-3"> {{item.id}}</div>
-                        <div class="mx-3"> {{item.item_title}}</div>
-                        <div class="mx-3"> {{item.item_description}}</div>
-                        <div class="mx-3"> {{item.item_sprice}}</div>
-                        <div class="mx-3"> {{item.item_picture}}</div>
-                        <div class="mx-3"> {{item.item_auctionfinish}}</div>
-                        <div class="mx-3"> {{item.item_personHighestBid}}</div>
+                <!-- <div v-if="(item.item_auctionfinish)>new Date()"> -->
+                    <div class="d-flex flex-column" v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
+                        <div class="d-flex flex-row p-2">
+                            <div class="mx-3"> {{item.id}}</div>
+                            <div class="mx-3"> {{item.item_title}}</div>
+                            <div class="mx-3"> {{item.item_description}}</div>
+                            <div class="mx-3"> {{item.item_sprice}}</div>
+                            <div class="mx-3"> {{item.item_picture}}</div>
+                            <div class="mx-3"> {{item.item_auctionfinish}}</div>
+                            <div class="mx-3"> {{item.item_personHighestBid}}</div>
+                        </div>
+
+                        <div class="d-flex flex-row p-2"  id="bidding_form">
+                            <h3>Bid for Item</h3>
+                            <label class="w-auto m-auto" >Email:</label><br>
+                            <input type="text" v-model="email"><br>
+
+                            <label class="w-auto m-auto">Bid:</label><br>
+                            <input type="number" v-model="item_sprice"><br>
+
+                            <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
+                        </div>
                     </div>
-
-                    <div class="d-flex flex-row p-2"  id="bidding_form">
-                        <h3>Bid for Item</h3>
-                        <label class="w-auto m-auto" >Email:</label><br>
-                        <input type="text" v-model="email"><br>
-
-                        <label class="w-auto m-auto">Bid:</label><br>
-                        <input type="number" v-model="item_sprice"><br>
-
-                        <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
-                    </div>
-                </div>
+                <!-- </div> -->
             </div>
             <div class="d-flex flex-column" v-else>
                 <table class="table border border-success w-100">
@@ -129,6 +131,7 @@
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import Header from './components/Header.vue'
+var expired:boolean
 
     export default{
     data() {
@@ -136,14 +139,20 @@ import Header from './components/Header.vue'
             items: [] as any[],
             search: '' as any,
             email: '' as string,
-            item_sprice: 0 as number
-        };
+            item_sprice: 0 as number        };
     },
     methods: {
         async fetchItems() {
             let response = await fetch("http://127.0.0.1:8000/api/addItems/");       //GET request
             let data = await response.json();
             this.items = data;
+        },
+        async CheckDateTime(today:Date){
+            const now= new Date()
+            
+            if (now > today){
+                expired=true;
+            }
         },
         async bidItem(id:number,email: string, item_sprice: number){
           const updated_data = {

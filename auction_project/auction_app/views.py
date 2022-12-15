@@ -252,3 +252,8 @@ def login_view(request):
                 return redirect('http://127.0.0.1:5173/')
         form = CustomUserLoginForm()
         return render(request, 'authentication/login.html', {'form': form})
+
+
+# @csrf_exempt
+# def check_login(request):
+#     if request.user.is_authenticated:
