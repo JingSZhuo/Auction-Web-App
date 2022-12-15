@@ -73,31 +73,6 @@ class CustomUser(AbstractUser):
             'user_profilePicture': self.profilePicture
         }
 
-
-
-# class User(models.Model):
-#     user_email = models.EmailField(max_length=254)
-#     user_dob = models.DateField()
-
-#     # to use ImageField you will need to install Pillow
-#     #pip install Pillow
-    
-#     user_profilePicture = models.ImageField()
-
-#     def __str__(self) -> str:
-#         return self.user_email
-#     def __str__(self) -> str:
-#         return str(self.user_dob)
-
-
-#     def to_dict(self):
-#         return{
-#             'id': self.id,
-#             'user_email': self.user_email,
-#             'user_dob': self.user_dob,
-#             'user_profilePicture': self.user_profilePicture
-#         }
-
 class Item(models.Model):
     item_title=models.CharField(max_length=254)
     item_description=models.CharField(max_length=2000)
@@ -141,3 +116,10 @@ class Item(models.Model):
             'item_personHighestBid':self.item_personHighestBid,
             'item_image': str(self.item_image)
         }
+
+class Questions(models.Model):
+    question_text = models.CharField(max_length=256)
+
+class Answers(models.Model):
+    question = models.ForeignKey(Questions, on_delete=models.CASCADE)
+    answers = models.CharField(max_length=1000)
