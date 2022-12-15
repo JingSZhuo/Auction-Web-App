@@ -88,6 +88,7 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
                     <div class="d-flex flex-row p-2"  id="bidding_form">
+<<<<<<< HEAD
                         <button @click="SeeChat()">See Chat</button>
                         <div v-if="seeChat==true">
                             text
@@ -97,8 +98,28 @@
                                         {{question['question_text']}}
                                         <!-- <input type="text" v-model="question_text">
                                         <button @click="postQuestions(question_text,item.id)">Post</button> -->
+=======
+                            <button @click="SeeChat()">See Chat</button>
+                            <div v-if="seeChat==true">
+                                text
+                                <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
+                                    {{question['question_text']}}
+                                    <div v-for="(answer, answer_id) in (answers['answers' as unknown as number])" :key="answer_id"><!--loop through answers-->
+                                        <!-- <div v-if="answer.question==question.id">Check if foreign key matches -->
+                                           {{answer['answer']}} 
+                                           
+                                        <!-- </div> -->
+>>>>>>> 57883dd2402e012e02c1ee70118b0df60daba3a1
                                     </div>
+                                    <input type="text" v-model="answer_text">
+                                    <button @click="postAnswers(answer_text,question.id)">Post Answer</button>
                                 </div>
+<<<<<<< HEAD
+=======
+                                <input type="text" v-model="question_text">
+                                <button @click="postQuestions(question_text,item.id)">Post Question</button>
+                                
+>>>>>>> 57883dd2402e012e02c1ee70118b0df60daba3a1
                             </div>
                             <input type="text" v-model="question_text">
                             <button @click="postQuestions(question_text,item.id)">Post</button>
@@ -108,58 +129,7 @@
             </div>
         </div>
     </div>
-    <!-- <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
-        <div v-if="search!=''">
-            <div v-if="((item.item_title.toLowerCase().search(search.toLowerCase()))!=-1 || (item.item_description.toLowerCase().search(search.toLowerCase()))!=-1)">
-                ID:{{item.id}}<br/>
-                Title:{{item.item_title}}<br/>
-                Description:{{item.item_description}}<br/>
-                Price: {{item.item_sprice}}<br/>
-                Picture: {{item.item_picture}}<br/>
-                Auction Finish: {{item.item_auctionfinish}}<br/>
-                Highest Bid: {{item.item_personHighestBid}}<br/>
-
-                <div id="bidding_form">
-                    <h1>Bid for Item</h1>
-                    <label>Email:</label><br>
-                    <input type="text" v-model="email"><br>
-
-                    <label>Bid:</label><br>
-                    <input type="number" v-model="item_sprice"><br>
-
-                    <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
-                </div>
-            </div>
-        </div>
-        <div v-else>
-            ID:{{item.id}}<br/>
-            Title:{{item.item_title}}<br/>
-            Description:{{item.item_description}}<br/>
-            Price: {{item.item_sprice}}<br/>
-            Picture: {{item.item_picture}}<br/>
-            Auction Finish: {{item.item_auctionfinish}}<br/>
-            Highest Bid: {{item.item_personHighestBid}}<br/>
-
-            <div id="bidding_form">
-                    <h1>Bid for Item</h1>
-                    <label>Email:</label><br>
-                    <input type="text" v-model="email"><br>
-
-                    <label>Bid:</label><br>
-                    <input type="number" v-model="item_sprice"><br>
-
-                    <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
-                </div>
-        </div>
-    </div> -->
-    <!-- <div>
-        <a href="./views/AddItem.vue">
-            <button type="button">Add Item Here</button>
-        </a>
-        <button @click="createNewUser">Add New User</button>
-    </div> -->
-
-
+    
 </template>
 
 <script lang="ts">
@@ -177,7 +147,9 @@ var expired:boolean
             item_sprice: 0 as number,
             seeChat: false as boolean,
             questions: [] as any[],
-            question_text: "" as string,      
+            question_text: "" as string,  
+            answers: [] as any[],   
+            answer_text: "" as string 
         };
     },
     methods: {
@@ -197,12 +169,12 @@ var expired:boolean
             this.seeChat= (!this.seeChat)
             this.fetchQuestion()
         },
-        // async fetchAnswer() {
-        //     let response = await fetch("http://127.0.0.1:8000/api/addAnswers_api/");       //GET request
-        //     let data = await response.json();
-        //     this.items = data;
-        //     console.log("data: ", this.items)
-        // },
+        async fetchAnswer() {
+            let response = await fetch("http://127.0.0.1:8000/api/addAnswers_api/");       //GET request
+            let data = await response.json();
+            this.answers = data;
+            console.log("data: ", this.answers)
+        },
         async postQuestions(question_text: string, itemID: number){
           //Ajax request to say that this is the new item model
           const user_form_input = {
@@ -219,25 +191,22 @@ var expired:boolean
           .then((response) => response.json())
           this.fetchQuestion()
         },
-        // async postAnswers(){
-        //   //Ajax request to say that this is the new item model
-        //   const user_form_input = {
-        //       itemTitle: this.item_title,
-        //       itemDescription: this.item_description,
-        //       itemStartingPrice: this.item_sprice,
-        //       itemPicture: this.item_picture,
-        //       itemActionFinish: this.item_auctionfinish
-        //   }
-        //   await fetch("http://127.0.0.1:8000/api/addItems/" , {
-        //       method: "POST",
-        //       headers: {
-        //           'Content-Type': 'application/json',
-        //       },
-        //       body: JSON.stringify(user_form_input),
-        //   })
-        //   .then((response) => response.json())
-        //   this.fetchItems()
-        // },
+        async postAnswers(answer_text: string, QuestionID: number){
+          //Ajax request to say that this is the new item model
+          const user_form_input = {
+            answerText: answer_text,
+            questionForeignKey: QuestionID,
+          }
+          await fetch("http://127.0.0.1:8000/api/addAnswers_api/" , {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(user_form_input),
+          })
+          .then((response) => response.json())
+          this.fetchAnswer()
+        },
         CheckDateTime(finish:Date){
             const now= new Date()
             const nowInMs= new Date(now).getTime()
