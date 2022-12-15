@@ -119,6 +119,10 @@ class Item(models.Model):
 
 class Question(models.Model):
     question_text = models.CharField(max_length=256)
+    question_item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.question_text
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

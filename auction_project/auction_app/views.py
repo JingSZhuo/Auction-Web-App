@@ -287,8 +287,9 @@ def addQuestions_api(request):
         })
     if request.method == 'POST':
         json_convert_to_dict = json.loads(request.body)
-        question = Item.objects.create(
-            question_text = json_convert_to_dict['questionText'] 
+        question = Question.objects.create(
+            question_text = json_convert_to_dict['questionText'],
+             
         ) 
         return JsonResponse(question.to_dict())
 
