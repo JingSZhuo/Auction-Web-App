@@ -44,6 +44,13 @@
 
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                         </div>
+                        <div class="d-flex flex-row p-2"  id="bidding_form">
+                            <button @click="seeChat=!seeChat">See Chat</button>
+                            <div v-if="seeChat">
+                                <input type="text">
+                                <button>Post</button>
+                            </div>
+                        </div>
                     </div>
                     
                 </div> 
@@ -72,6 +79,13 @@
 
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
+                    <div class="d-flex flex-row p-2"  id="bidding_form">
+                            <button @click="seeChat=!seeChat">See Chat</button>
+                            <div v-if="seeChat">
+                                <input type="text">
+                                <button>Post</button>
+                            </div>
+                        </div>
                 </div>
         </div>
         </div>
@@ -142,7 +156,9 @@ var expired:boolean
             items: [] as any[],
             search: '' as any,
             email: '' as string,
-            item_sprice: 0 as number        };
+            item_sprice: 0 as number,
+            seeChat: false as boolean      
+        };
     },
     methods: {
         async fetchItems() {
