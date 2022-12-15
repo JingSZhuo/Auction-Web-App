@@ -82,8 +82,14 @@
                     <div class="d-flex flex-row p-2"  id="bidding_form">
                             <button @click="seeChat=!seeChat">See Chat</button>
                             <div v-if="seeChat">
-                                <input type="text">
-                                <button>Post</button>
+                                <div> <!--loop through questions-->
+                                    <div><!--loop through answers-->
+                                        <div><!--Check if foreign key matches-->
+                                            <input type="text">
+                                            <button>Post</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </div>

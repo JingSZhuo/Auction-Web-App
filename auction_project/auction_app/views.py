@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Item, CustomUserManager, CustomUser
+from .models import Item, CustomUserManager, CustomUser, Question, Answer
 from django.views.generic.edit import CreateView
 
 """Form imports"""
@@ -276,3 +276,33 @@ def display_profile(request):
 # @csrf_exempt
 # def check_login(request):
 #     if request.user.is_authenticated:
+
+def addQuestions_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'questions': [
+                q.to_dict()
+                for q in Question.objects.all()
+            ]
+        })
+    if request.method == 'POST':
+        json_convert_to_dict = json.loads(request.body)
+        question = Item.objects.create(
+            question_text = json_convert_to_dict['questionText'] 
+        ) 
+        return JsonResponse(question.to_dict())
+
+def addAnswers_api(request):
+    if request.method == 'GET':
+        return JsonResponse({
+            'answers': [
+                a.to_dict()
+                for a in Answer.objects.all()
+            ]
+        })
+    if request.method == 'POST':
+        json_convert_to_dict = json.loads(request.body)
+        answer = Answer.objects.create(
+            answers = json_convert_to_dict['answerText'] 
+        ) 
+        return JsonResponse(answer.to_dict())
