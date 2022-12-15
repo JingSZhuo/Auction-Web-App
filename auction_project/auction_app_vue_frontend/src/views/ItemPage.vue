@@ -1,5 +1,5 @@
 <template>
-    <h1> Hello i hope this works</h1>
+    <!-- <h1> Hello i hope this works</h1>
     <h1>{{item_title}}</h1>
     <h3>{{item_description}}</h3>
     <h3>{{item_sprice}}</h3>
@@ -15,13 +15,13 @@
       <input type="number" v-model="item_sprice"><br>
 
       <button @click="bidItem">Add my Bid</button>
-    </div>
+    </div> -->
 
 
 </template>
 
 
-<script lang="ts">
+<!-- <script lang="ts">
 import { useRoute, useRouter } from 'vue-router';
 import { computed, ComputedRef, defineComponent } from 'vue';
 import Header from '../components/Header.vue'
@@ -85,4 +85,4 @@ if (currentDate > endDate){
 }
   
 
-</script>
+</script> -->

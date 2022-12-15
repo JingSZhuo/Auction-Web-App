@@ -1,14 +1,18 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang='en'>
 
-{% block title %}Home{% endblock %}
+<head>
+  <title> {% block title %} Home {% endblock  %}</title>
+</head>
+<body>
+  <div id="main_content">
 
-{% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
-{% endblock %}
+    {% block main_content %}{% endblock  %}
+
+  </div>
+
+
+</body> 
+
+
+</html>

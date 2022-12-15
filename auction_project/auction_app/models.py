@@ -17,7 +17,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(
             email=email,
             date_of_birth=date_of_birth,
-            profilePicture="",
+            profilePicture=profile_picture,
             **extra_fields
         )
         user.set_password(password)
@@ -48,8 +48,8 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(max_length=254, unique=True, default="")
-    date_of_birth = models.DateField(default="")
-    profilePicture = models.ImageField(default="")
+    date_of_birth = models.DateField(null=True, blank=True)
+    profilePicture = models.CharField(max_length=254, default="")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -103,8 +103,10 @@ class Item(models.Model):
     item_description=models.CharField(max_length=2000)
     item_sprice=models.DecimalField(max_digits=100,decimal_places=2)
     item_picture=models.CharField(max_length=254)
-    item_auctionfinish=models.DateTimeField()
-    item_personHighestBid=models.CharField(max_length=254, default="tbd")
+    item_auctionfinish=models.DateTimeField(null=True, blank=True)
+    item_personHighestBid=models.EmailField(max_length=254, default="tbd@tbd.tbd")
+    item_image=models.ImageField(upload_to='./auction_app_vue_frontend/src/Images', max_length=100, null=True, default=None)
+
 
     def __str__(self):
         return self.item_description
@@ -120,6 +122,9 @@ class Item(models.Model):
 
     def __str__(self) -> str:
         return self.item_personHighestBid
+        
+    def __str__(self) -> str:
+        return self.item_image
     
     def __str__(self):
         return self.item_title
@@ -132,5 +137,7 @@ class Item(models.Model):
             'item_description': self.item_description,
             'item_sprice': self.item_sprice,
             'item_picture': self.item_picture,
-            'item_auctionfinish': self.item_auctionfinish
+            'item_auctionfinish': self.item_auctionfinish,
+            'item_personHighestBid':self.item_personHighestBid,
+            'item_image': str(self.item_image)
         }

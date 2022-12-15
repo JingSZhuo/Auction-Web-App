@@ -2,16 +2,20 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from auction_app.models import CustomUser
 
 
-class CusomUserCreationForm(UserCreationForm):
+class CustomUserSignupForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('email',)
-        
+        fields = ('email', 'password1', 'password2')
+
+class CustomUserLoginForm(AuthenticationForm):
+    class Meta:
+        model = CustomUser
+        fields= ('email', 'password')
         
 
 class CustomUserChangeForm(UserChangeForm):
     
     class Meta: 
         model = CustomUser
-        fields = ('email',)
+        fields = ('email','password')
 

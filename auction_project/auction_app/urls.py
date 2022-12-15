@@ -8,9 +8,19 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('api/addItems/', views.addItems_api),
-    path('signup/', views.signup_page, name="signup"),
-    path('login/', views.login_page, name="login" ),
+    
+    #Authentication
+    path('signupPage/', views.signup_view, name="signup"),
+    path('loginPage/', views.login_view, name="login" ),
     path('redirect/', views.redirect_page, name="testing_redirect"),
     path('logout/', views.logout_page, name="logout"),
-    path('hidden/', views.hidden_page, name="hidden")
+    
+    #api_json
+    path('api/usertest_api',views.usertest_api),
+    path('api/useremail_api',views.useremail_api),
+    path('api/userdob_api',views.userdob_api),
+    path('api/profilepicture', views.profile_change),
+
+    #login_only_pages
+    path('hidden/', views.hidden_page, name="hidden"),
 ]
