@@ -117,9 +117,9 @@ class Item(models.Model):
             'item_image': str(self.item_image)
         }
 
-class Questions(models.Model):
+class Question(models.Model):
     question_text = models.CharField(max_length=256)
 
-class Answers(models.Model):
-    question = models.ForeignKey(Questions, on_delete=models.CASCADE)
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answers = models.CharField(max_length=1000)
