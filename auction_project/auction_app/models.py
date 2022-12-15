@@ -133,3 +133,12 @@ class Question(models.Model):
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answers = models.CharField(max_length=1000)
+
+    def __str__(self) -> str:
+        return self.answers
+
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'answers': self.answers
+        }

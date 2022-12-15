@@ -295,6 +295,7 @@ def addQuestions_api(request):
              
         ) 
         return JsonResponse(question.to_dict())
+
 @csrf_exempt
 def addAnswers_api(request):
     if request.method == 'GET':
@@ -306,7 +307,10 @@ def addAnswers_api(request):
         })
     if request.method == 'POST':
         json_convert_to_dict = json.loads(request.body)
+        id=json_convert_to_dict['questionForeignKey']
+        question_obj=Question.objects.get(pk=id)
         answer = Answer.objects.create(
-            answers = json_convert_to_dict['answerText'] 
-        ) 
+            question= question_obj,
+            answers = json_convert_to_dict['answerText']   
+        )
         return JsonResponse(answer.to_dict())
