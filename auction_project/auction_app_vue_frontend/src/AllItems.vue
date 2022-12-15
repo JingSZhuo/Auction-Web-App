@@ -88,24 +88,24 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
                     <div class="d-flex flex-row p-2"  id="bidding_form">
-                            <button @click="SeeChat()">See Chat</button>
-                            <div v-if="seeChat==true">
-                                text
-                                <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
-                                    <div><!--loop through answers-->
-                                        <div><!--Check if foreign key matches-->
-                                            {{question['question_text']}}
-                                            <!-- <input type="text" v-model="question_text">
-                                            <button @click="postQuestions(question_text,item.id)">Post</button> -->
-                                        </div>
+                        <button @click="SeeChat()">See Chat</button>
+                        <div v-if="seeChat==true">
+                            text
+                            <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
+                                <div><!--loop through answers-->
+                                    <div><!--Check if foreign key matches-->
+                                        {{question['question_text']}}
+                                        <!-- <input type="text" v-model="question_text">
+                                        <button @click="postQuestions(question_text,item.id)">Post</button> -->
                                     </div>
                                 </div>
-                                <input type="text" v-model="question_text">
-                                <button @click="postQuestions(question_text,item.id)">Post</button>
                             </div>
+                            <input type="text" v-model="question_text">
+                            <button @click="postQuestions(question_text,item.id)">Post</button>
                         </div>
+                    </div>
                 </div>
-        </div>
+            </div>
         </div>
     </div>
     <!-- <div v-for="(item, item_id) in (items['items' as unknown as number])" :key="item_id">
