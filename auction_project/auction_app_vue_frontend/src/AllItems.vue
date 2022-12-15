@@ -38,7 +38,7 @@
                             <h3>Bid for Item</h3>
                             <label class="w-auto m-auto" >Email:</label><br>
                             <input type="text" v-model="email"><br>
-
+    
                             <label class="w-auto m-auto">Bid:</label><br>
                             <input type="number" v-model="item_sprice"><br>
 
