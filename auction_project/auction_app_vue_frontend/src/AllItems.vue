@@ -105,24 +105,23 @@
                     <div class="d-flex flex-row p-2"  id="bidding_form">
                             <button @click="SeeChat()">See Chat</button>
                             <div v-if="seeChat==true">
-                                text
                                 <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
-                                    {{question['question_text']}}
-                                    <div v-for="(answer, answer_id) in (answers['answers' as unknown as number])" :key="answer_id"><!--loop through answers-->
-                                        <!-- <div v-if="answer.question==question.id">Check if foreign key matches -->
-                                           {{answer['answer']}} 
-                                           
-                                        <!-- </div> -->
-                                    </div>
-                                    <input type="text" v-model="answer_text">
-                                    <button @click="postAnswers(answer_text,question.id)">Post Answer</button>
+                                        {{question['question_text']}}
+                                        <div v-for="(answer, answer_id) in (answers['answers' as unknown as number])" :key="answer_id"><!--loop through answers-->
+                                            <!-- <div v-if="answer.question==question.id">Check if foreign key matches -->
+                                            {{answer['answers']}} 
+                                            
+                                            <!-- </div> -->
+                                        </div>
+                                        <input type="text" v-model="answer_text">
+                                        <button @click="postAnswers(answer_text,question.id)">Post Answer</button>
                                 </div>
                                 <input type="text" v-model="question_text">
                                 <button @click="postQuestions(question_text,item.id)">Post Question</button>
                                 
                             </div>
-                            <input type="text" v-model="question_text">
-                            <button @click="postQuestions(question_text,item.id)">Post</button>
+                            <!-- <input type="text" v-model="question_text">
+                            <button @click="postQuestions(question_text,item.id)">Post</button> -->
                         </div>
                     </div>
                 </div>
@@ -172,6 +171,7 @@ import ItemPage from './views/ItemPage.vue'
         SeeChat(){
             this.seeChat= (!this.seeChat)
             this.fetchQuestion()
+            this.fetchAnswer()
         },
         async fetchAnswer() {
             let response = await fetch("http://127.0.0.1:8000/api/addAnswers_api/");       //GET request
