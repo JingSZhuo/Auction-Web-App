@@ -9,9 +9,9 @@
         <br/>
     </div>
 
-    <div>
-        <table class="table border border-success w-100">
-            <tr class="table border border-warning ">
+    <div class="text-bg-light">
+        <table class="table border border-success mx-auto">
+            <tr class="table border border-dark bg-warning">
                 <th style="width: 10%;">ID</th>
                 <th style="width: 10%;">Title</th>
                 <th style="width: 20%;">Description</th>

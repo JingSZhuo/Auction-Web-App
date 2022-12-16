@@ -2,11 +2,11 @@
     <div>
         <h1 class="display-1"><strong>Welcome to our BTEC Ebay!</strong></h1>
     </div>
-    <nav class="navbar-expand-lg navbar-light bg-light d-flex justify-content-center ">   
+    <nav class="navbar-expand-lg navbar-light bg-light d-flex align-content-center flex-wrap">   
         <router-link class="mx-auto" to="/allItems"><strong>List All Items</strong></router-link>|
         <router-link class="mx-auto" to="/addItem"><strong>Add Item</strong></router-link>|
         <router-link class="mx-auto" to="/profilePage"><strong>Profile</strong></router-link>
-        <button class="align-items-end" @click="logout"><strong>logout</strong></button>
+        <button class="ml-auto" @click="logout"><strong>logout</strong></button>
     </nav>
     <div>
         <br/>

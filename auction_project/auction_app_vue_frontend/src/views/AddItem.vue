@@ -1,18 +1,45 @@
 <template>
     <div>
       <h1 class="display-3">Add An Item</h1>
-      <label>Title:</label><br>
-      <input type="text" v-model="item_title"><br>
-      <label>Description:</label><br>
-      <input type="textarea" v-model="item_description"><br>
-      <label>Starting Price:</label><br>
-      <input type="number" v-model="item_sprice"><br>
-      <label>Picture:</label><br>
-      <input type="text" v-model="item_picture"><br>
-      <label>Date and Time of Auction Finish</label><br/>
-      <input type="datetime-local" v-model="item_auctionfinish"><br/>
+
+      <div class="p-5 border border-primary">
+      <form class="d-flex justify-content-center ">
+        <label class="p-2"><strong>Item Name:</strong> </label><br>
+        <input type="text" v-model="item_title" placeholder="Enter Item Name"><br/>
+      </form>
+
       <br/>
-      <button @click="postItems">Add New Item</button>
+      
+      <form class="d-flex justify-content-center">
+        <label class="p-2"><strong>Description:</strong></label><br>
+        <textarea rows="5" v-model="item_description" placeholder="Enter Description" w-75></textarea><br>
+      </form>
+
+      <br/>
+
+      <form class="d-flex justify-content-center">
+        <label class="p-2"><strong> Starting Price:</strong></label><br>
+        <input type="number" v-model="item_sprice"><br>
+      </form>
+
+      <br/>
+      
+      <form class="d-flex justify-content-center">
+        <label class="p-2"><strong> Photo:</strong></label><br>
+        <input type="text" v-model="item_picture"><br>
+      </form>
+      
+      <br/>
+
+      <form class="d-flex justify-content-center">
+        <label class="p-2"><strong> Date and Time of Auction Finish</strong></label><br/>
+        <input type="datetime-local" v-model="item_auctionfinish"><br/>
+      </form>
+      </div>
+      
+      
+      <br/>
+      <button class="btn btn-primary btn-lg btn btn-success" @click="postItems">Add New Item</button>
     </div>
 </template>
 
