@@ -1,5 +1,10 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang='en'>
+
+{% comment %} <link rel="stylesheet" href="{% static 'stylesheet.css' %}"> {% endcomment %}
 
 <head>
   <title> {% block title %} Home {% endblock  %}</title>
@@ -7,7 +12,9 @@
 <body>
   <div id="main_content">
 
-    {% block main_content %}{% endblock  %}
+    {% block main_content %}
+    
+    {% endblock  %}
 
   </div>
 

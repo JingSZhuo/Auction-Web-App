@@ -1,6 +1,15 @@
 {% extends 'home.html' %}
 
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+
+
 {% block main_content %}
+
+<div class="form">
 
 <h1>Login</h1>
 
@@ -17,11 +26,12 @@
     {% endfor %} 
 
 
-    <button type="submit">Login</button>
-    <a href="{% url 'signup' %}">Signup-Page</a>
+    <button type="submit">Login</button> 
+    </br>
+    <a href="{% url 'signup' %}">Don't have an account? Sign up!</a>
 </form>
-
-
-
+</div>
 
 {% endblock main_content %}
+
+</html>

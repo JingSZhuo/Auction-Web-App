@@ -1,6 +1,8 @@
 {% extends 'home.html' %}
 
 {% block main_content %}
+
+<div class="form">
 <h1>Signup Form</h1>
 
 <form method='post'> 
@@ -17,7 +19,9 @@
     <input type="password" name="password"> {% endcomment %}
 
     <button type="submit">Sign Up</button>
-    <a href="{% url 'login' %}">Login-Page</a>
+    </br>
+    <a href="{% url 'login' %}">Have an account? Log in!</a>
 
 </form>
+</div>
 {% endblock  %}
