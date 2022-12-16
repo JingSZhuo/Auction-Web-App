@@ -5,20 +5,10 @@
 <div class="form">
 <h1>Signup Form</h1>
 
-<div class="form">
 
     <form method='post'> 
         {% csrf_token %}
 
-<<<<<<< HEAD
-    <button type="submit">Sign Up</button>
-    </br>
-    <a href="{% url 'login' %}">Have an account? Log in!</a>
-
-</form>
-</div>
-{% endblock  %}
-=======
         {% for field in form %}
             <p>
                 {{field.label_tag}}<br>
@@ -30,11 +20,11 @@
         <input type="password" name="password"> {% endcomment %}
 
         <button type="submit">Sign Up</button>
-        <a href="{% url 'login' %}">Login-Page</a>
+        <br/>
+        <a href="{% url 'login' %}">Have an account? Log in!</a>
 
 </form>
 
 </div>
 {% endblock  %}
 
->>>>>>> c171c74315ff7f0e10a593aefe91088c291ddd5b
