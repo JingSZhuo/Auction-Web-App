@@ -3,7 +3,6 @@ import ItemPage from '../views/ItemPage.vue'
 import Home from '../views/Home.vue'
 import AddItem from '../views/AddItem.vue'
 import AllItems from '../AllItems.vue'
-import Logout from '../views/logout.vue'
 import ProfilePage from '../views/ProfilePage.vue'
 
 //below: dynamically routed! 
@@ -29,11 +28,6 @@ const routes = [
         path: '/allItems/:id',
         name: 'ItemPage',
         component: ItemPage
-    },
-    {
-        path: '/logout',
-        name: 'logout',
-        component: Logout
     },
     {
         path: '/allItems',

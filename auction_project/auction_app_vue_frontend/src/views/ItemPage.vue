@@ -1,24 +1,71 @@
 <template>
-    <!-- <h1> Hello i hope this works</h1>
-    <h1>{{item_title}}</h1>
-    <h3>{{item_description}}</h3>
-    <h3>{{item_sprice}}</h3>
-    <h3>{{item_auctionfinish}}</h3>
-    <div>{{item_picture}}</div>
+     <h1> Item page</h1>
+
 
     <div id="bidding_form">
-      <h1>Bid for Item</h1>
-      <label>Email:</label><br>
-      <input type="text" v-model="email"><br>
+        <h1>Bid for Item</h1>
+        <label>KeyID: {{keyID}}</label><br>
+        <label>Item ID: {{itemID}}</label><br>
+        <label>Item: {{itemtitle}} </label><br>
+        <label>Item Description: {{itemdescription}}</label><br>
+        <label>Item Starting Price: {{itemstartingprice}}</label><br>
+        <label>Auction Finish Date: {{itemauctionfinishdate}}</label><br>
+        <label>Highest bidder: {{itemauctionhighestbidder}}</label>
+    </div> 
+    <div class="d-flex flex-row p-2" id="bidding_form">
+        <h3>Bid for Item</h3>
+        <label class="w-auto m-auto">Email:</label><br>
+        <input type="text" v-model="email"><br>
 
-      <label>Bid:</label><br>
-      <input type="number" v-model="item_sprice"><br>
+        <label class="w-auto m-auto">Bid:</label><br>
+        <input type="number" v-model="item_sprice"><br>
 
-      <button @click="bidItem">Add my Bid</button>
-    </div> -->
+        <button @click="bidItem(keyID+1,email,item_sprice)">Add my Bid</button>
+    </div>
 
 
 </template>
+
+<script lang="ts">
+
+export default {
+
+    props: [ 'itemtitle', 'itemID', 'itemdescription', 'itemstartingprice', 'itemauctionfinishdate', 'itemauctionhighestbidder', 'keyID' ],
+    data() {
+        return {
+            email: '',
+            item_sprice: '' as any as number,
+            items: []
+        }
+    },
+    methods: {
+        async bidItem(id:number,email: string, item_sprice: number){
+          const updated_data = {
+            item_id:id,
+            updated_email: email,
+            updated_sprice: item_sprice,
+
+          }
+          await fetch("http://localhost:8000/api/addItems/" , {
+              method: "PUT",
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(updated_data),
+          })
+          .then((response) => response.json())
+        },
+        async fetchItems() {
+            let response = await fetch("http://127.0.0.1:8000/api/addItems/");       //GET request
+            let data = await response.json();
+            this.items = data;
+            console.log("data: ", this.items)
+        },
+    
+    }
+}
+
+</script>
 
 
 <!-- <script lang="ts">
