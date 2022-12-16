@@ -11,10 +11,10 @@ cd into vue folder
 npm install 
 
 list of group members, with a short description (one sentence) of what each member was assigned to do, and what they actually did in terms of contributing to the final deliverable
-Jing Zhuo
-Winnie Yap
-Miguel Divo
-Kalina Ivanova
+Jing Zhuo- authentication, login/logout, Bidding
+Winnie Yap-Routing, Q&A, Displaying Items
+Miguel Divo-Openshift, Add New Item,End of Bid check
+Kalina Ivanova-Profile Page, Add New Item, Search
 
 
 the URL of your deployed application (if deployed)
