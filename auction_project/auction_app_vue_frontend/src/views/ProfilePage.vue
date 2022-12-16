@@ -100,7 +100,7 @@
               body: JSON.stringify(updated_email),
           })
           .then((response) => response.json())
-          this.fetchUsers()
+          this.fetchProfile()
         },
 
         async SaveDOB(id:number,dob: Date){
@@ -117,7 +117,7 @@
               body: JSON.stringify(updated_dob),
           })
           .then((response) => response.json())
-          this.fetchUsers()
+          this.fetchProfile()
         },
         async changeProfilePicture () {
           const formData = new FormData()
