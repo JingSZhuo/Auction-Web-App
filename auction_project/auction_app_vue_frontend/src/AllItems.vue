@@ -78,6 +78,19 @@
                             <td style="width: 10%; word-wrap: break-word;"> {{item.item_personHighestBid}}</td>
                         </tr>
                     </table>
+                    <hr/>
+                    <!-- <ItemPage               ITEM COMPONENT
+                        :keyID="item_id"
+                        :itemID=" item['id' as unknown as number]"
+                        :itemtitle="item['item_title' as unknown as string]"
+                        :itemdescription="item['item_description' as unknown as string]"
+                        :itemstartingprice="item['item_sprice' as unknown as string]"
+                        :itemauctionfinishdate="item['item_auctionfinish' as unknown as any]"
+                        :itemauctionhighestbidder="item['item_personHighestBid' as unknown as string]"
+                    /> -->
+                    <hr/>
+
+
                     <div class="d-flex flex-row p-2" id="bidding_form">
                             <h3>Bid for Item</h3>
                             <label class="w-auto m-auto">Email:</label><br>
@@ -123,8 +136,12 @@ import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import Header from './components/Header.vue'
 var expired:boolean
-
+import ItemPage from './views/ItemPage.vue'
     export default{
+
+    components: {
+        ItemPage,
+    }   , 
     data() {
         return {
             items: [] as any[],
