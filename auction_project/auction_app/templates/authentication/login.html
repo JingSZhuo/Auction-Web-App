@@ -2,24 +2,27 @@
 
 {% block main_content %}
 
-<h1>Login</h1>
+<div class="form">
 
-<form method='post'>
-    
-    {% csrf_token %}
-    {% comment "form is from the key of the dictopnary passed into the render function" %}{% endcomment %}
-    {% for field in form %}      
-    <p>
-        {{field.label_tag}}<br>
-        {{field}}
-    </p>
+    <h1>Login</h1>
 
-    {% endfor %} 
+    <form method='post'>
+        
+        {% csrf_token %}
+        {% comment "form is from the key of the dictopnary passed into the render function" %}{% endcomment %}
+        {% for field in form %}      
+        <p>
+            {{field.label_tag}}<br>
+            {{field}}
+        </p>
+
+        {% endfor %} 
 
 
-    <button type="submit">Login</button>
-    <a href="{% url 'signup' %}">Signup-Page</a>
-</form>
+        <button type="submit">Login</button>
+        <a href="{% url 'signup' %}">Signup-Page</a>
+    </form>
+</div>
 
 
 

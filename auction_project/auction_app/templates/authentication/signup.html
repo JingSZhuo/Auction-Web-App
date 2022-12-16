@@ -3,21 +3,26 @@
 {% block main_content %}
 <h1>Signup Form</h1>
 
-<form method='post'> 
-    {% csrf_token %}
+<div class="form">
 
-    {% for field in form %}
-        <p>
-            {{field.label_tag}}<br>
-            {{field}}
-        </p>
-    
-    {% endfor %} 
-    {% comment %} <input type="text" name="email">
-    <input type="password" name="password"> {% endcomment %}
+    <form method='post'> 
+        {% csrf_token %}
 
-    <button type="submit">Sign Up</button>
-    <a href="{% url 'login' %}">Login-Page</a>
+        {% for field in form %}
+            <p>
+                {{field.label_tag}}<br>
+                {{field}}
+            </p>
+        
+        {% endfor %} 
+        {% comment %} <input type="text" name="email">
+        <input type="password" name="password"> {% endcomment %}
+
+        <button type="submit">Sign Up</button>
+        <a href="{% url 'login' %}">Login-Page</a>
 
 </form>
+
+</div>
 {% endblock  %}
+
