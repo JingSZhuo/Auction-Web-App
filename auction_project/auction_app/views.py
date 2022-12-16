@@ -41,7 +41,6 @@ def addItems_api(request):
             item_title = json_convert_to_dict['itemTitle'],
             item_description = json_convert_to_dict['itemDescription'],
             item_sprice = json_convert_to_dict['itemStartingPrice'],
-            item_picture = json_convert_to_dict['itemPicture'],
             item_auctionfinish = json_convert_to_dict['itemActionFinish'],
         ) 
         return JsonResponse(item.to_dict())
@@ -165,21 +164,6 @@ def userdob_api(request):
         ]        
     })
 
-    
-@csrf_exempt
-def signup_page(request):
-    if request.method == 'POST':
-        json_convert_to_python_dictionary = json.loads(request.body)
-        user = CustomUser.object.create_user(
-                json_convert_to_python_dictionary['email'], 
-                json_convert_to_python_dictionary['password'],
-                json_convert_to_python_dictionary['dob'], 
-                json_convert_to_python_dictionary['image'],
-            )
-        user.save()
-    return HttpResponse("Created!")
-
-
 @csrf_exempt
 def redirect_page(request):
     if request.method == 'GET':
@@ -189,22 +173,6 @@ def redirect_page(request):
             return HttpResponse("Not logged in")
     else:
         return HttpResponse("Null")
-
-    #json_convert_to_python_dictionary = json.loads(request.body)
-    # #print(json_convert_to_python_dictionary)
-    # email = json_convert_to_python_dictionary['email']
-    # password = json_convert_to_python_dictionary['password']
-    # email_string = json.dumps(email)
-    # password_string = json.dumps(password)
-    # print(email_string + " " + password_string)
-    # email = "test@gmail.com"
-    # password = "password"
-    # user = authenticate(request, username=request.POST['email'], password=request.POST['password'])
-    # if user is not None:
-    #     login(request, user)
-    #     return HttpResponse("Successfully Logged in")
-    # else:
-    #     return HttpResponse("Failed to login with: "+ email+ " "+ password)
     
 @csrf_exempt        
 def logout_page(request):
@@ -273,9 +241,7 @@ def display_profile(request):
             }
         )
     else: return HttpResponse("Not logged in")
-# @csrf_exempt
-# def check_login(request):
-#     if request.user.is_authenticated:
+
 @csrf_exempt
 def addQuestions_api(request):
     if request.method == 'GET':

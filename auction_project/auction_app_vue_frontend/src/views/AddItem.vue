@@ -22,12 +22,6 @@
         <input type="number" v-model="item_sprice"><br>
       </form>
 
-      <br/>
-      
-      <form class="d-flex justify-content-center">
-        <label class="p-2"><strong> Photo:</strong></label><br>
-        <input type="text" v-model="item_picture"><br>
-      </form>
       
       <br/>
 
@@ -73,7 +67,6 @@
               itemTitle: this.item_title,
               itemDescription: this.item_description,
               itemStartingPrice: this.item_sprice,
-              itemPicture: this.item_picture,
               itemActionFinish: this.item_auctionfinish
           }
           await fetch("http://127.0.0.1:8000/api/addItems/" , {
@@ -85,6 +78,7 @@
           })
           .then((response) => response.json())
           this.fetchItems()
+          alert("Posted item")
         },
     }
   }

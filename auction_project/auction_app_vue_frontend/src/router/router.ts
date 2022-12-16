@@ -5,14 +5,6 @@ import AddItem from '../views/AddItem.vue'
 import AllItems from '../AllItems.vue'
 import ProfilePage from '../views/ProfilePage.vue'
 
-//below: dynamically routed! 
-//const Home = import('../views/Home.vue')
-//const AllItems = import('../AllItems.vue')
-//const ItemPage = import('../views/AddItem.vue')
-
-
-// const history = createWebHashHistory(); //switches view from hash to history mode
-
 const routes = [
     {
         path: '/home',                  //URL where route can be found
@@ -39,8 +31,6 @@ const routes = [
         name: 'profilepage',
         component: ProfilePage,
     }
-    
-
 ]
 
 const router = createRouter({

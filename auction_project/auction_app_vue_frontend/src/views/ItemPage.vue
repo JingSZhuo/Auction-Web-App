@@ -35,7 +35,7 @@ export default {
         return {
             email: '',
             item_sprice: '' as any as number,
-            items: []
+            itemsupdated: []
         }
     },
     methods: {
@@ -54,14 +54,18 @@ export default {
               body: JSON.stringify(updated_data),
           })
           .then((response) => response.json())
+          this.fetchItems()
         },
         async fetchItems() {
             let response = await fetch("http://127.0.0.1:8000/api/addItems/");       //GET request
             let data = await response.json();
-            this.items = data;
-            console.log("data: ", this.items)
+            this.itemsupdated = data;
+            console.log("data: ", this.itemsupdated)
         },
     },
+    mounted() {
+        this.fetchItems()
+    }
 }
 
 </script>

@@ -79,7 +79,7 @@
                         </tr>
                     </table>
                     <hr/>
-                    <ItemPage               ITEM COMPONENT
+                    <!-- <ItemPage               
                         :keyID="item_id"
                         :itemID=" item['id' as unknown as number]"
                         :itemtitle="item['item_title' as unknown as string]"
@@ -87,8 +87,7 @@
                         :itemstartingprice="item['item_sprice' as unknown as string]"
                         :itemauctionfinishdate="item['item_auctionfinish' as unknown as any]"
                         :itemauctionhighestbidder="item['item_personHighestBid' as unknown as string]"
-                        @vnode-updated="fetchItems()"
-                    />
+                    /> -->
                     <hr/>
 
 
@@ -103,7 +102,7 @@
                             <button @click="bidItem(item_id+1,email,item_sprice)">Add my Bid</button>
                     </div>
                     <div class="d-flex flex-row p-2"  id="bidding_form">
-                            <button @click="SeeChat()">See Chat</button>
+                            <button @click="SeeChat()">See Q&A</button>
                             <div v-if="seeChat==true">
                                 <div v-for="(question, question_id) in (questions['questions' as unknown as number])" :key="question_id"> <!--loop through questions-->
                                         {{question['question_text']}}
