@@ -1,13 +1,14 @@
 <template>
 
     <div>
+        <h1 class="display-2">All Items</h1>
+        <form>
+            <label class="p-2"><strong>Search: </strong></label>
+            <input class="p-2  border" type="text" placeholder="Search Items here" v-model="search">
+        </form>        
         <br/>
-        <h1>All Items</h1>
-        <!-- <Header></Header> -->
-        <label>Search: </label>
-        <input type="text" v-model="search">
-        
     </div>
+
     <div>
         <table class="table border border-success w-100">
             <tr class="table border border-warning ">

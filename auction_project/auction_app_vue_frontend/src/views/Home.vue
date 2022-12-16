@@ -1,12 +1,15 @@
 <template>
     <div>
-        <h2> welcome to our btec ebay!</h2>
+        <h1 class="display-1"><strong>Welcome to our BTEC Ebay!</strong></h1>
     </div>
-    <div>   
-            <router-link to="/allItems">List All Items</router-link>|
-            <router-link to="/addItem">Add Item</router-link>|
-            <router-link to="/profilePage">Profile</router-link>|
-            <button @click="logout">logout</button>
+    <nav class="navbar-expand-lg navbar-light bg-light d-flex justify-content-center ">   
+        <router-link class="mx-auto" to="/allItems"><strong>List All Items</strong></router-link>|
+        <router-link class="mx-auto" to="/addItem"><strong>Add Item</strong></router-link>|
+        <router-link class="mx-auto" to="/profilePage"><strong>Profile</strong></router-link>
+        <button class="align-items-end" @click="logout"><strong>logout</strong></button>
+    </nav>
+    <div>
+        <br/>
             <router-view/>                   <!--Shows the component when a router-link is clicked-->
     </div>
     
