@@ -79,7 +79,7 @@
                         </tr>
                     </table>
                     <hr/>
-                    <!-- <ItemPage               ITEM COMPONENT
+                    <ItemPage               ITEM COMPONENT
                         :keyID="item_id"
                         :itemID=" item['id' as unknown as number]"
                         :itemtitle="item['item_title' as unknown as string]"
@@ -87,7 +87,8 @@
                         :itemstartingprice="item['item_sprice' as unknown as string]"
                         :itemauctionfinishdate="item['item_auctionfinish' as unknown as any]"
                         :itemauctionhighestbidder="item['item_personHighestBid' as unknown as string]"
-                    /> -->
+                        @vnode-updated="fetchItems()"
+                    />
                     <hr/>
 
 
@@ -233,22 +234,22 @@ import ItemPage from './views/ItemPage.vue'
                 
         },
         async bidItem(id:number,email: string, item_sprice: number){
-          const updated_data = {
-            item_id:id,
-            updated_email: email,
-            updated_sprice: item_sprice,
+            const updated_data = {
+                item_id:id,
+                updated_email: email,
+                updated_sprice: item_sprice,
 
-          }
-          await fetch("http://localhost:8000/api/addItems/" , {
+            }
+            await fetch("http://localhost:8000/api/addItems/" , {
               method: "PUT",
               headers: {
                   'Content-Type': 'application/json',
               },
               body: JSON.stringify(updated_data),
-          })
-          .then((response) => response.json())
-          this.fetchItems()
-    }
+            })
+            .then((response) => response.json())
+            this.fetchItems()
+        }
 
     },
     mounted(){

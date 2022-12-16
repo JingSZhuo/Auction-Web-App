@@ -61,8 +61,7 @@ export default {
             this.items = data;
             console.log("data: ", this.items)
         },
-    
-    }
+    },
 }
 
 </script>
