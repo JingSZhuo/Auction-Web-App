@@ -108,7 +108,6 @@
                                         {{question['question_text']}}
                                         <div v-for="(answer, answer_id) in (answers['answers' as unknown as number])" :key="answer_id"><!--loop through answers-->
                                             <!-- <div v-if="answer.question==question.id">Check if foreign key matches -->
-                                            text heree
                                             {{answer['answers']}} 
                                             
                                             <!-- </div> -->
