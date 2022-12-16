@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Add An Item</h1>
+      <h1 class="display-3">Add An Item</h1>
       <label>Title:</label><br>
       <input type="text" v-model="item_title"><br>
       <label>Description:</label><br>
@@ -9,8 +9,9 @@
       <input type="number" v-model="item_sprice"><br>
       <label>Picture:</label><br>
       <input type="text" v-model="item_picture"><br>
-      <label>Date and Time of Auction Finish</label><br>
-      <input type="datetime-local" v-model="item_auctionfinish"><br>
+      <label>Date and Time of Auction Finish</label><br/>
+      <input type="datetime-local" v-model="item_auctionfinish"><br/>
+      <br/>
       <button @click="postItems">Add New Item</button>
     </div>
 </template>
